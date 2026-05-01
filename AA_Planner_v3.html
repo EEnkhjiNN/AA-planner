@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AA Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--nv:#0f2444;--bl:#2563eb;--tl:#0d9488;--gn:#16a34a;--am:#d97706;--rd:#dc2626;--gy:#64748b;--lt:#f1f5f9;--bd:#e2e8f0;--bg:#f0f4f8;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:#1e293b;display:flex;min-height:100vh;}
+.sb{width:220px;background:var(--nv);position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column;overflow-y:auto;}
+.sb-logo{padding:20px 18px 14px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;}
+.sb-logo .lt2{font-size:18px;font-weight:800;color:#fff;}
+.sb-logo .ls{font-size:9px;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
+.ns{padding:8px 16px 3px;font-size:9px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:2px;margin-top:5px;}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 12px;color:rgba(255,255,255,.58);font-size:12.5px;font-weight:500;cursor:pointer;margin:1px 8px;border-radius:8px;transition:all .15s;}
+.ni:hover{background:rgba(255,255,255,.07);color:#fff;}
+.ni.active{background:rgba(37,99,235,.32);color:#fff;}
+.ni-ic{width:16px;text-align:center;font-size:13px;}
+.nbr{margin-left:auto;color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;}
+.nb-r{background:var(--rd);}
+.nb-g{background:var(--tl);}
+.main{margin-left:220px;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+.topbar{background:#fff;border-bottom:1px solid var(--bd);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.tb-t{font-size:15px;font-weight:700;color:var(--nv);}
+.tb-r{display:flex;align-items:center;gap:10px;}
+.td{font-size:11px;color:var(--gy);font-family:'JetBrains Mono',monospace;background:var(--lt);padding:4px 10px;border-radius:6px;}
+.av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--bl),var(--tl));display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;}
+.ct{padding:20px 24px;}
+.page{display:none;}
+.page.active{display:block;}
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+.sc{background:#fff;border-radius:12px;padding:16px 18px;border:1px solid var(--bd);position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.s-bl::before{background:var(--bl);}
+.s-gn::before{background:var(--gn);}
+.s-am::before{background:var(--am);}
+.s-rd::before{background:var(--rd);}
+.s-gy::before{background:var(--gy);}
+.s-tl::before{background:var(--tl);}
+.sl{font-size:10px;font-weight:700;color:var(--gy);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;}
+.sv{font-size:28px;font-weight:800;letter-spacing:-1.5px;line-height:1;}
+.sv.bl{color:var(--bl);}
+.sv.gn{color:var(--gn);}
+.sv.am{color:var(--am);}
+.sv.rd{color:var(--rd);}
+.sv.gy{color:var(--gy);}
+.sv.tl{color:var(--tl);}
+.sv.nv{color:var(--nv);}
+.ss{font-size:11px;color:var(--gy);margin-top:5px;}
+/* CARD */
+.card{background:#fff;border-radius:12px;border:1px solid var(--bd);overflow:hidden;margin-bottom:16px;}
+.card:last-child{margin-bottom:0;}
+.ch{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd);background:#fafafa;}
+.ct2{font-size:13px;font-weight:700;color:var(--nv);}
+.cm{font-size:11px;color:var(--gy);}
+/* TABLE */
+table{width:100%;border-collapse:collapse;}
+th{padding:8px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--gy);text-transform:uppercase;letter-spacing:.7px;background:#f8fafc;border-bottom:1px solid var(--bd);white-space:nowrap;}
+td{padding:10px 12px;font-size:12px;color:#334155;border-bottom:1px solid #f1f5f9;vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#fafbfc;}
+.tn{font-weight:600;color:var(--nv);font-size:12px;line-height:1.4;}
+.tc{font-size:10px;color:var(--gy);margin-top:2px;}
+.ic{font-weight:700;color:#94a3b8;font-size:12px;}
+/* BADGE */
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:600;white-space:nowrap;}
+.b-p{background:#dbeafe;color:#1d4ed8;}
+.b-d{background:#dcfce7;color:#15803d;}
+.b-n{background:#f1f5f9;color:#64748b;}
+.b-o{background:#fee2e2;color:#b91c1c;}
+.b-h{background:#fef3c7;color:#92400e;}
+.b-m{background:#e0f2fe;color:#0369a1;}
+.b-wk{background:#f0fdf4;color:#15803d;}
+/* PROGRESS */
+.pw{display:flex;align-items:center;gap:5px;}
+.pb{width:58px;height:4px;background:#e2e8f0;border-radius:2px;overflow:hidden;flex-shrink:0;}
+.pf{height:100%;border-radius:2px;}
+.pp{font-size:11px;color:var(--gy);font-family:'JetBrains Mono',monospace;min-width:28px;}
+.dt-o{color:var(--rd);font-weight:600;}
+.dt-n{color:var(--gy);}
+/* SLABEL */
+.sl2{font-size:10px;font-weight:700;color:var(--gy);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:9px;margin-top:2px;}
+/* TWO COL */
+.two{display:grid;grid-template-columns:1fr 290px;gap:16px;}
+/* ADVISOR */
+.ar{display:flex;align-items:center;gap:11px;padding:10px 14px;border-bottom:1px solid #f1f5f9;}
+.ar:last-child{border-bottom:none;}
+.aa{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
+.an{font-size:12px;font-weight:600;color:var(--nv);}
+.ac{font-size:10px;color:var(--gy);margin-top:1px;}
+.abar{flex:1;height:4px;background:#e2e8f0;border-radius:2px;overflow:hidden;margin-top:4px;}
+.afill{height:100%;border-radius:2px;}
+.anum{font-size:16px;font-weight:800;color:var(--nv);min-width:22px;text-align:right;}
+/* CAT */
+.cr{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid #f1f5f9;}
+.cr:last-child{border-bottom:none;}
+.crn{font-size:12px;font-weight:600;color:var(--nv);}
+.crbar{flex:1;margin:0 10px;height:4px;background:#e2e8f0;border-radius:2px;overflow:hidden;}
+.crfill{height:100%;background:var(--bl);border-radius:2px;}
+.crnum{font-size:14px;font-weight:800;color:var(--bl);}
+/* DAYS */
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:20px;}
+.dc{background:#fff;border-radius:10px;border:1px solid var(--bd);overflow:hidden;}
+.dc.today{border-color:var(--bl);border-width:2px;}
+.dh{padding:7px 6px;text-align:center;border-bottom:1px solid var(--bd);background:#f8fafc;}
+.dc.today .dh{background:var(--nv);}
+.ddn{font-size:9px;font-weight:700;color:var(--gy);text-transform:uppercase;}
+.ddd{font-size:14px;font-weight:800;color:var(--nv);margin-top:1px;}
+.dc.today .ddn{color:rgba(255,255,255,.5);}
+.dc.today .ddd{color:#fff;}
+.db{padding:6px;min-height:52px;}
+.dchip{font-size:9px;font-weight:600;padding:3px 5px;border-radius:4px;margin-bottom:3px;line-height:1.3;display:block;}
+.dchip.bl{background:#dbeafe;color:#1d4ed8;border-left:2px solid var(--bl);}
+.dchip.am{background:#fef3c7;color:#92400e;border-left:2px solid var(--am);}
+.dchip.gn{background:#dcfce7;color:#15803d;border-left:2px solid var(--gn);}
+.dem{font-size:9px;color:#cbd5e1;text-align:center;padding:12px 0;}
+/* FILTERS */
+.fb{display:flex;align-items:center;gap:9px;margin-bottom:14px;flex-wrap:wrap;}
+.fl{font-size:11px;font-weight:600;color:var(--gy);}
+select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size:12px;font-weight:500;color:var(--nv);background:#fff;cursor:pointer;font-family:inherit;}
+.sb2{padding:6px 11px;border:1px solid var(--bd);border-radius:7px;font-size:12px;font-family:inherit;color:var(--nv);width:200px;}
+.sb2:focus{outline:none;border-color:var(--bl);}
+/* MY WORK */
+.msel{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--lt);border-bottom:1px solid var(--bd);}
+.ms-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.ms-item{padding:10px 14px;border-right:1px solid var(--bd);}
+.ms-item:last-child{border-right:none;}
+/* SUMMARY */
+.sbox{padding:14px 16px;font-size:12px;line-height:1.7;color:#475569;}
+.sbox strong{color:var(--nv);}
+.sbox strong.rd{color:var(--rd);}
+.tw{overflow-x:auto;}
+.nd{text-align:center;padding:28px;color:var(--gy);font-size:12px;}
+</style>
+</head>
+<body>
+
+<aside class="sb">
+  <div class="sb-logo">
+    <div class="lt2">AA Planner</div>
+    <div class="ls">Ажлын удирдлага</div>
+  </div>
+  <nav style="padding:8px 0;flex:1">
+    <div class="ns">Үндсэн</div>
+    <div class="ni active" onclick="go('dashboard',this)"><span class="ni-ic">◼</span>Хяналтын самбар</div>
+    <div class="ni" onclick="go('tasks',this)"><span class="ni-ic">☰</span>Ажлын сан<span class="nbr nb-g">77</span></div>
+    <div class="ni" onclick="go('urgent',this)"><span class="ni-ic">⚡</span>Яаралтай чиглэл<span class="nbr nb-r">23</span></div>
+    <div class="ns">Миний</div>
+    <div class="ni" onclick="go('mywork',this)"><span class="ni-ic">👤</span>Миний ажил</div>
+    <div class="ni" onclick="go('weekly',this)"><span class="ni-ic">📅</span>7 хоногийн тайлан</div>
+    <div class="ns">Бусад</div>
+    <div class="ni" onclick="go('meetings',this)"><span class="ni-ic">🗓</span>Хурал & Уулзалт</div>
+    <div class="ni" onclick="go('settings',this)"><span class="ni-ic">⚙</span>Тохиргоо</div>
+  </nav>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="tb-t" id="ptitle">Хяналтын самбар</div>
+    <div class="tb-r">
+      <span class="td" id="today-date"></span>
+      <div class="av">EE</div>
+    </div>
+  </div>
+
+  <div class="ct">
+
+    <!-- DASHBOARD -->
+    <div id="pg-dashboard" class="page active">
+      <div class="sg">
+        <div class="sc s-bl"><div class="sl">Нийт бүртгэлтэй ажил</div><div class="sv bl">77</div><div class="ss">Ажлын санд бүртгэлтэй</div></div>
+        <div class="sc s-gn"><div class="sl">Дууссан</div><div class="sv gn">13</div><div class="ss">17% нийт ажлаас</div></div>
+        <div class="sc s-am"><div class="sl">Хэрэгжиж байгаа</div><div class="sv am">33</div><div class="ss">Гүйцэтгэлд байгаа</div></div>
+        <div class="sc s-rd"><div class="sl">Хугацаа хэтэрсэн</div><div class="sv rd">2</div><div class="ss">Яаралтай анхаарал</div></div>
+      </div>
+      <div class="two">
+        <div>
+          <div class="sl2">Сүүлийн ажлуудын жагсаалт</div>
+          <div class="card">
+            <div class="ch"><span class="ct2">Ажлын сан — сүүлийн 12</span><span class="cm">Нийт 77 ажил</span></div>
+            <div class="tw"><table id="dt-table"></table></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px">
+            <div class="card">
+              <div class="ch"><span class="ct2">Төлөвийн тархалт</span></div>
+              <table><tbody>
+                <tr><td style="font-weight:600">Эхлээгүй</td><td style="text-align:right;font-weight:800;color:var(--gy);font-size:15px">10</td></tr>
+                <tr><td style="font-weight:600">Хэрэгжиж байгаа</td><td style="text-align:right;font-weight:800;color:var(--bl);font-size:15px">33</td></tr>
+                <tr><td style="font-weight:600">Дууссан</td><td style="text-align:right;font-weight:800;color:var(--gn);font-size:15px">13</td></tr>
+                <tr><td style="font-weight:600">Огноогүй</td><td style="text-align:right;font-weight:800;color:var(--gy);font-size:15px">21</td></tr>
+                <tr><td style="font-weight:600">Хугацаа хэтэрсэн</td><td style="text-align:right;font-weight:800;color:var(--rd);font-size:15px">2</td></tr>
+              </tbody></table>
+            </div>
+            <div class="card">
+              <div class="ch"><span class="ct2">Ажлын ангиллаар</span></div>
+              <div id="dt-cats"></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="sl2">Зөвлөхүүдийн ажлын тоо</div>
+          <div class="card">
+            <div class="ch"><span class="ct2">Нийт зөвлөхүүд</span><span class="cm">9 зөвлөх</span></div>
+            <div id="dt-advisors"></div>
+          </div>
+          <div class="sl2" style="margin-top:4px">Хэтэрсэн ажлууд</div>
+          <div class="card" style="border-color:#fca5a5">
+            <div class="ch" style="background:#fff5f5"><span class="ct2" style="color:#b91c1c">Хугацаа хэтэрсэн (2)</span></div>
+            <div id="dt-overdue"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- АЖЛЫН САН -->
+    <div id="pg-tasks" class="page">
+      <div class="sg">
+        <div class="sc s-bl"><div class="sl">Нийт</div><div class="sv bl">77</div></div>
+        <div class="sc s-gn"><div class="sl">Дууссан</div><div class="sv gn">13</div></div>
+        <div class="sc s-am"><div class="sl">Хэрэгжиж байгаа</div><div class="sv am">33</div></div>
+        <div class="sc s-gy"><div class="sl">Эхлээгүй</div><div class="sv gy">10</div></div>
+      </div>
+      <div class="fb">
+        <span class="fl">Шүүх:</span>
+        <select class="fs" id="f-owner" onchange="renderTasks()"><option value="">Бүх зөвлөх</option></select>
+        <select class="fs" id="f-status" onchange="renderTasks()">
+          <option value="">Бүх төлөв</option>
+          <option>Эхлээгүй</option><option>Хэрэгжиж байгаа</option><option>Дууссан</option>
+        </select>
+        <select class="fs" id="f-cat" onchange="renderTasks()"><option value="">Бүх ангилал</option></select>
+        <input type="text" class="sb2" id="f-search" placeholder="Ажлын нэрээр хайх..." oninput="renderTasks()">
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ct2">Ажлын жагсаалт</span><span class="cm" id="tc">77 ажил</span></div>
+        <div class="tw"><table id="t-table"></table></div>
+      </div>
+    </div>
+
+    <!-- ЯАРАЛТАЙ ЧИГЛЭЛ -->
+    <div id="pg-urgent" class="page">
+      <div class="sg">
+        <div class="sc s-bl"><div class="sl">Нийт яаралтай</div><div class="sv bl">23</div></div>
+        <div class="sc s-rd"><div class="sl">Хэтэрсэн</div><div class="sv rd">8</div><div class="ss">Яаралтай дэмжлэг</div></div>
+        <div class="sc s-am"><div class="sl">Энэ 7 хоногт</div><div class="sv am">10</div><div class="ss">04.27–05.03</div></div>
+        <div class="sc s-tl"><div class="sl">Дууссан</div><div class="sv tl">5</div><div class="ss">100% гүйцэтгэлтэй</div></div>
+      </div>
+      <div class="fb">
+        <span class="fl">Шүүх:</span>
+        <select class="fs" id="u-owner" onchange="renderUrgent()"><option value="">Бүх хариуцагч</option></select>
+        <select class="fs" id="u-status" onchange="renderUrgent()">
+          <option value="">Бүх төлөв</option>
+          <option value="overdue">Хэтэрсэн</option>
+          <option value="week">Энэ долоо хоногт</option>
+          <option value="done">Дууссан</option>
+          <option value="upcoming">Хожмын</option>
+        </select>
+        <select class="fs" id="u-cat" onchange="renderUrgent()"><option value="">Бүх ангилал</option></select>
+        <input type="text" class="sb2" id="u-search" placeholder="Ажлын нэрээр хайх..." oninput="renderUrgent()">
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ct2">Яаралтай, цаг үеийн шинжтэй ажлууд</span><span class="cm" id="uc">23 ажил</span></div>
+        <div class="tw"><table id="u-table"></table></div>
+      </div>
+    </div>
+
+    <!-- МИНИЙ АЖИЛ -->
+    <div id="pg-mywork" class="page">
+      <div class="card" style="margin-bottom:16px">
+        <div class="msel">
+          <span style="font-size:12px;font-weight:600;color:var(--gy)">👇 Нэрээ сонгоход таны ажлууд харагдана:</span>
+          <select class="fs" id="my-owner" onchange="renderMyWork()" style="font-size:13px;font-weight:600">
+            <option value="">— Сонгоно уу —</option>
+          </select>
+        </div>
+        <div class="ms-grid" id="my-stats"></div>
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ct2" id="my-title">Ажлын жагсаалт</span><span class="cm" id="my-count">—</span></div>
+        <div class="tw"><table id="my-table"></table></div>
+      </div>
+    </div>
+
+    <!-- 7 ХОНОГИЙН ТАЙЛАН -->
+    <div id="pg-weekly" class="page">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+        <div>
+          <div style="font-size:12px;color:var(--gy);margin-bottom:3px">7 хоногийн тайлан</div>
+          <div style="font-size:19px;font-weight:700;color:var(--nv)">2026.04.27 — 2026.05.03</div>
+        </div>
+        <div style="font-size:12px;color:var(--gy);background:var(--lt);padding:6px 14px;border-radius:8px;font-family:'JetBrains Mono',monospace">Даваа — Ням</div>
+      </div>
+      <div class="sg">
+        <div class="sc s-am"><div class="sl">7 хоногт дуусах</div><div class="sv am">5</div><div class="ss">ID:7,8,15,71,77</div></div>
+        <div class="sc s-rd"><div class="sl">Хугацаа хэтэрсэн</div><div class="sv rd">2</div><div class="ss">ID:9, ID:26</div></div>
+        <div class="sc s-bl"><div class="sl">Нийт нээлттэй</div><div class="sv bl">43</div><div class="ss">Хэрэгжиж байгаа + Эхлээгүй</div></div>
+        <div class="sc s-gn"><div class="sl">Дууссан нийт</div><div class="sv gn">13</div><div class="ss">Ажлын санд</div></div>
+      </div>
+      <div class="sl2">Өдрөөр харах — дуусах огноогоор</div>
+      <div class="days">
+        <div class="dc today">
+          <div class="dh"><div class="ddn">Даваа</div><div class="ddd">27</div></div>
+          <div class="db"><div class="dem">Дуусах ажил байхгүй</div></div>
+        </div>
+        <div class="dc"><div class="dh"><div class="ddn">Мягмар</div><div class="ddd">28</div></div><div class="db"><div class="dem">Дуусах ажил байхгүй</div></div></div>
+        <div class="dc"><div class="dh"><div class="ddn">Лхагва</div><div class="ddd">29</div></div><div class="db"><div class="dem">Дуусах ажил байхгүй</div></div></div>
+        <div class="dc">
+          <div class="dh"><div class="ddn">Пүрэв</div><div class="ddd">30</div></div>
+          <div class="db">
+            <span class="dchip gn">ID:7 · Аргачлалын төсөлд санал — Дууссан</span>
+            <span class="dchip gn">ID:8 · Бүртгэх систем нэвтрүүлэх — Дууссан</span>
+          </div>
+        </div>
+        <div class="dc">
+          <div class="dh"><div class="ddn">Баасан</div><div class="ddd">01</div></div>
+          <div class="db">
+            <span class="dchip bl">ID:15 · Govsec 26 арга хэмжээ</span>
+            <span class="dchip am">ID:71 · Эрүүл мэндийн өгөгдлийн үнэ цэн</span>
+            <span class="dchip am">ID:77 · Эрүүл мэндийн цахим шилжилт</span>
+          </div>
+        </div>
+        <div class="dc"><div class="dh"><div class="ddn">Бямба</div><div class="ddd">02</div></div><div class="db"><div class="dem">Дуусах ажил байхгүй</div></div></div>
+        <div class="dc"><div class="dh"><div class="ddn">Ням</div><div class="ddd">03</div></div><div class="db"><div class="dem">Дуусах ажил байхгүй</div></div></div>
+      </div>
+      <div class="two">
+        <div>
+          <div class="sl2">Энэ 7 хоногт дуусах ажлууд (5)</div>
+          <div class="card">
+            <div class="ch"><span class="ct2">Долоо хоногийн ажлын жагсаалт</span><span class="cm">2026.04.30 — 2026.05.01</span></div>
+            <div class="tw"><table id="wk-table"></table></div>
+          </div>
+          <div class="sl2" style="margin-top:4px">Хугацаа хэтэрсэн ажлууд (2)</div>
+          <div class="card" style="border-color:#fca5a5">
+            <div class="ch" style="background:#fff5f5"><span class="ct2" style="color:#b91c1c">Хэтэрсэн ажлууд</span><span class="cm" style="color:#b91c1c">Яаралтай анхаарал</span></div>
+            <div class="tw"><table id="wk-over-table"></table></div>
+          </div>
+        </div>
+        <div>
+          <div class="sl2">Зөвлөхүүдийн ачаалал (энэ долоо хоногт)</div>
+          <div class="card">
+            <div class="ch"><span class="ct2">Энэ долоо хоногт</span><span class="cm">3 зөвлөх</span></div>
+            <div>
+              <div class="ar">
+                <div class="aa" style="background:#2563eb">TS</div>
+                <div style="flex:1;min-width:0">
+                  <div class="an">Tengis Sukhee</div>
+                  <div class="ac">4 ажил (2 дууссан, 1 хэтэрсэн) · 43% дундаж</div>
+                  <div class="abar"><div class="afill" style="width:43%;background:#2563eb"></div></div>
+                </div>
+                <div class="anum">4</div>
+              </div>
+              <div class="ar">
+                <div class="aa" style="background:#ea580c">NG</div>
+                <div style="flex:1;min-width:0">
+                  <div class="an">Nomin Ganbat</div>
+                  <div class="ac">1 ажил · 50%</div>
+                  <div class="abar"><div class="afill" style="width:50%;background:#ea580c"></div></div>
+                </div>
+                <div class="anum">1</div>
+              </div>
+              <div class="ar">
+                <div class="aa" style="background:#dc2626">EG</div>
+                <div style="flex:1;min-width:0">
+                  <div class="an">Erdenetuya Ganbold</div>
+                  <div class="ac">1 ажил (хэтэрсэн) · 70%</div>
+                  <div class="abar"><div class="afill" style="width:70%;background:#dc2626"></div></div>
+                </div>
+                <div class="anum">1</div>
+              </div>
+            </div>
+          </div>
+          <div class="sl2" style="margin-top:4px">Товч дүгнэлт</div>
+          <div class="card">
+            <div class="sbox">
+              <p style="margin-bottom:7px">Энэ долоо хоногт <strong>5 ажил</strong> дуусах хуваарьтай.</p>
+              <p style="margin-bottom:7px">ID:7, ID:8 ажлууд <strong style="color:var(--gn)">дууссан</strong> — сайн явц.</p>
+              <p style="margin-bottom:7px"><strong class="rd">2 ажил хугацаа хэтэрсэн</strong> — ID:9 (Tengis), ID:26 (Erdenetuya).</p>
+              <p>Нийт <strong>2 хэтэрсэн</strong> — өмнөх долоо хоноготой харьцуулахад <strong style="color:var(--gn)">сайжирсан</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ХУРАЛ -->
+    <div id="pg-meetings" class="page">
+      <div class="sg">
+        <div class="sc s-bl"><div class="sl">Нийт хурал</div><div class="sv bl">3</div></div>
+        <div class="sc s-gn"><div class="sl">Дууссан</div><div class="sv gn">2</div></div>
+        <div class="sc s-am"><div class="sl">Ирэх хурал</div><div class="sv am">1</div></div>
+        <div class="sc s-nv"><div class="sl">Оролцогч дундаж</div><div class="sv nv">6</div></div>
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ct2">Хурал & Уулзалтын бүртгэл</span><span class="cm">2026-04 сар</span></div>
+        <div style="padding:14px 16px">
+          <div style="padding:12px 14px;border-left:3px solid var(--bl);background:#f8fafc;border-radius:0 8px 8px 0;margin-bottom:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--nv)">Байгуулгын долоо хоногийн хурал</div>
+            <div style="font-size:10px;color:var(--gy);margin-top:4px;display:flex;gap:14px"><span>📅 2026.04.22</span><span>🕙 10:00–11:30</span><span>👥 8 оролцогч</span></div>
+            <div style="margin-top:8px;font-size:11px;color:#475569;padding:8px 10px;background:#fff;border-radius:6px;border:1px solid var(--bd);line-height:1.5">Ganbat Bulgaa-гийн хариуцсан ID:65–70 ажлууд бүгд дууссан. Tengis-ийн ID:7, ID:8 ажлуудыг яаруулах шаардлагатай байсан — дууслаа.</div>
+            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+              <span class="badge b-d">Дууссан</span>
+              <span class="badge b-h">Хавсралт: хурлын тэмдэглэл.docx</span>
+            </div>
+          </div>
+          <div style="padding:12px 14px;border-left:3px solid var(--tl);background:#f0fdfa;border-radius:0 8px 8px 0;margin-bottom:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--nv)">Засгийн газартай уулзалт — Аргачлалын хэлэлцүүлэг</div>
+            <div style="font-size:10px;color:var(--gy);margin-top:4px;display:flex;gap:14px"><span>📅 2026.04.20</span><span>🕑 14:00–15:00</span><span>👥 5 оролцогч</span></div>
+            <div style="margin-top:8px;font-size:11px;color:#475569;padding:8px 10px;background:#fff;border-radius:6px;border:1px solid var(--bd);line-height:1.5">ID:7, ID:8 ажлуудын аргачлалын төсөл хэлэлцэгдлээ. Батлагдсан — ажлууд дууссан.</div>
+            <div style="display:flex;gap:6px;margin-top:8px"><span class="badge b-d">Дууссан</span><span class="badge b-m">Хавсралт: санал.pdf</span></div>
+          </div>
+          <div style="padding:12px 14px;border-left:3px solid var(--am);background:#fffbeb;border-radius:0 8px 8px 0">
+            <div style="font-size:13px;font-weight:700;color:var(--nv)">Govsec 26 бэлтгэл хурал</div>
+            <div style="font-size:10px;color:var(--gy);margin-top:4px;display:flex;gap:14px"><span>📅 2026.04.28</span><span>🕙 09:00–10:00</span><span>👥 4 оролцогч</span></div>
+            <div style="margin-top:8px;font-size:11px;color:#475569;padding:8px 10px;background:#fff;border-radius:6px;border:1px solid var(--bd);line-height:1.5">Tengis Sukhee хариуцана. ID:15 ажилтай холбоотой — 2026.05.01 дуусна.</div>
+            <div style="display:flex;gap:6px;margin-top:8px"><span class="badge b-n">Бэлтгэл үе шатанд</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ТОХИРГОО -->
+    <div id="pg-settings" class="page">
+      <div class="card">
+        <div class="ch"><span class="ct2">Системийн тохиргоо</span></div>
+        <div style="padding:18px">
+          <div style="margin-bottom:18px">
+            <div style="font-size:12px;font-weight:700;color:var(--nv);margin-bottom:8px">Мэдэгдлийн тохиргоо</div>
+            <div style="padding:10px 14px;background:var(--lt);border-radius:8px;font-size:12px;color:#475569;line-height:1.8">
+              ✅ Шинэ ажил нэмэгдэхэд мэдэгдэл явуулна (5 талбар бөглөгдсэний дараа)<br>
+              ✅ Ажил шинэчлэгдэхэд нэгтгэсэн мэдэгдэл (5 минутын дотор нэг мэйл)<br>
+              ✅ Хугацаа дөхсөн үед (2 хоног үлдэхэд) өдөр бүр 09:00-д мэдэгдэл явуулна<br>
+              ✅ ЯАРАЛТАЙ ЧИГЛЭЛ-д өөрчлөлт орохоод мэдэгдэл явуулна
+            </div>
+          </div>
+          <div style="margin-bottom:18px">
+            <div style="font-size:12px;font-weight:700;color:var(--nv);margin-bottom:8px">Хүлээн авагчид (ТОХИРГОО!F12:F27)</div>
+            <div style="padding:10px 14px;background:var(--lt);border-radius:8px;font-size:11px;color:#475569;line-height:1.9">
+              1. e.enhjin99@gmail.com · 2. Ldshdmbrl@gmail.com · 3. Tamir8901@gmail.com<br>
+              4. eccsinfo11@gmail.com · 5. bulgan.bt@gmail.com · 6. bulgaaganbat@gmail.com<br>
+              7. chimguundarin@gmail.com · 8. tengis.advisor@gmail.com · 9. tslmn0309@gmail.com<br>
+              10. b.sukhochir@gmail.com · 11. uchralnyamosor@gmail.com · 12. jsuhe27@gmail.com<br>
+              13. odmaa278@gmail.com · 14. nomingan222@gmail.com
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--nv);margin-bottom:8px">Apps Script trigger-үүд</div>
+            <div style="padding:10px 14px;background:var(--lt);border-radius:8px;font-size:12px;color:#475569;line-height:1.8">
+              ✅ aaPlannerOnEdit — From spreadsheet · On edit<br>
+              ✅ processPendingDigestEmails — Time-based · Every 5 minutes<br>
+              ✅ sendDueSoonNotifications — Time-based · Every day 09:00
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ═══ БОДИТ ӨГӨГДӨЛ — 2026.04.27-ийн байдлаар ═══
+const TASKS=[
+  {id:1,n:"МАН-ын шуурхай хуралд суух",c:"Ажлын алба",o:"Tamir Erdene-Ochir",cl:"",st:"",due:"",s:"Эхлээгүй",p:"Дунд",pg:0,ov:false,wk:false},
+  {id:2,n:"Зөвшөөрлийн тухай хуулийн нэмэлт, өөрчлөлтийн хуулийн төслийн хэлэлцүүлэг",c:"УИХ",o:"Tengis Sukhee",cl:"",st:"",due:"2026.06.30",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,ov:false,wk:false},
+  {id:3,n:"Мэргэжлийн нэгдсэн холбооны тухай хуульд ҮХЦ-ийн дүгнэлтээр нэмэлт, өөрчлөлт оруулах хуулийн төслийн хэлэлцүүлэг",c:"УИХ",o:"Tengis Sukhee",cl:"",st:"",due:"2026.05.31",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,ov:false,wk:false},
+  {id:4,n:"Эдийн засгийн бодлогын зөвлөлийн АА чиг үүргийг шинэчлэх",c:"Засгийн газар",o:"Tengis Sukhee",cl:"Dashdemberel",st:"2026.04.13",due:"2026.04.17",s:"Дууссан",p:"Дунд",pg:100,ov:false,wk:false},
+  {id:5,n:"Бизнесийн орчны цахим шилжилтийг нэвтрүүлэх, e-Business 2.0 нээлт",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"",due:"2026.06.01",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,ov:false,wk:false},
+  {id:6,n:"Тайлан, мэдээний once-only зарчмыг 100 хоногт хэрэгжүүлэх",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"",due:"2026.07.01",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,ov:false,wk:false},
+  {id:7,n:"Зөвшөөрөл бий болгоход нийгэм, эдийн засгийн үнэлгээ хийх аргачлалын төсөлд санал тусгаж, ЗГ-аар батлуулах",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"",due:"2026.04.30",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:true},
+  {id:8,n:"Зөвшөөрөл шаардлагагүй мэдэгдлийн шинжтэй үйл ажиллагааг бүртгэх системийг нэвтрүүлэх, холбогдох ЗГ тогтоолыг батлуулах",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"",due:"2026.04.30",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:true},
+  {id:9,n:"Засгийн газрын хороо, зөвлөлийн талаар арга хэмжээний санал танилцуулах",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"2026.04.14",due:"2026.04.16",s:"Хэрэгжиж байгаа",p:"Дунд",pg:50,ov:true,wk:false},
+  {id:10,n:"Нийслэлийн харьяа бизнесийн бүртгэл хийдэг байгууллагуудад license.mn систем нэвтрүүлэхтэй холбогдуулан сургалт хийх",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"2026.04.17",due:"2026.04.17",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:false},
+  {id:11,n:"Эрдэнэс Монгол нэгдлийг Баялгийн сан болгох талаар судлах, бүтэц, зохион байгуулалтын шинэчлэлийг танилцуулах",c:"ЗГХЭГ-тай холбоотой",o:"Tengis Sukhee",cl:"",st:"2026.04.13",due:"2026.05.11",s:"Хэрэгжиж байгаа",p:"",pg:0,ov:false,wk:false},
+  {id:12,n:"Эрүүл мэндийн цахим шилжилтийн ажлын хэсэгт ажиллах",c:"Засгийн газар",o:"Tengis Sukhee",cl:"Nomin",st:"2026.04.30",due:"2026.06.01",s:"Эхлээгүй",p:"Дунд",pg:0,ov:false,wk:false},
+  {id:13,n:"Мэдээллийн технологийн үйлдвэрлэлийг дэмжих үндэсний зөвлөлийн хурал",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"2026.04.20",due:"2026.04.21",s:"Дууссан",p:"Өндөр",pg:0,ov:false,wk:false},
+  {id:14,n:"ЕС асуулгын цаг /Чуулган/-д бэлтгэх",c:"УИХ",o:"Tengis Sukhee",cl:"",st:"2026.04.20",due:"2026.04.24",s:"Дууссан",p:"Өндөр",pg:0,ov:false,wk:false},
+  {id:15,n:"Govsec 26 арга хэмжээнд оролцох",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"2026.05.01",due:"2026.05.01",s:"Эхлээгүй",p:"",pg:0,ov:false,wk:true},
+  {id:16,n:"Ногоон зээлийн шинэ журмыг Монгол банкаар зарлуулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:17,n:"Цэнэглэх станцийн УБ дахь байршлыг тогтоох",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:18,n:"Цэнэглэх станцийн орон нутаг дахь байршлыг тодорхойлно",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:19,n:"Цэнэглэх станцийг барих хувийн хэвшилтэй хэлэлцүүлэг хийж гарсан саналыг бодлогод тусгана",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:20,n:"Цэнэглэх станцуудын холбох зөвшөөрлийг хялбаршуулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:21,n:"Цэнэглэх станцуудын газрын зөвшөөрлийн шийдүүлнэ",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:22,n:"Орон нутагт амрах цэгийг ажилуулах хувийн хэвшилтэй уулзаж гэрээ байгуулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:23,n:"Цэнэглэгч хошууны стандартийг тогтооно",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:24,n:"Хувийн зогсоолтой айлуудад цэнэглэх зөвшөөрлийг хялбаршуулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:25,n:"СӨХ-үүдтэй уулзаж гэрээ байгуулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:26,n:"ЭТТ иргэдэд эзэмшүүлсэн хувьцааг өвлүүлэх эрхийг нээх Засгийн газрын тогтоол",c:"ЗГХЭГ-тай холбоотой",o:"Erdenetuya Ganbold",cl:"",st:"2026.04.09",due:"2026.04.15",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:70,ov:true,wk:false},
+  {id:27,n:"Эрдэнэс Монгол нэгдлийг Чингис хаан ҮБС болгож бүтэц, зохион байгуулалтын шинэчлэлийг танилцуулах",c:"ЗГХЭГ-тай холбоотой",o:"Erdenetuya Ganbold",cl:"",st:"2026.04.09",due:"2026.05.09",s:"Эхлээгүй",p:"Өндөр",pg:0,ov:false,wk:false},
+  {id:28,n:"ЭТТ-д сэргээгдэх эрчим хүчний төсөл хэрэгжүүлэхийг даалгах",c:"ЗГХЭГ-тай холбоотой",o:"Erdenetuya Ganbold",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Эхлээгүй",p:"",pg:0,ov:false,wk:false},
+  {id:29,n:"Эрдэнэс Монгол нэгдлийн 4 компанид шатахуун нөөцлөх агуулах барих даалгах",c:"ЗГХЭГ-тай холбоотой",o:"Erdenetuya Ganbold",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Дууссан",p:"",pg:100,ov:false,wk:false},
+  {id:30,n:"Эрдэнэс Монгол нэгдэлд ААН-ийн 1 хувийн татварын хөнгөлөлтөөр биеийн тамир, спортын төвийг шинэчлэх барих асуудлыг судалж, танилцуулах",c:"ЗГХЭГ-тай холбоотой",o:"Erdenetuya Ganbold",cl:"Tengis",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:31,n:"Эрдэнэс Монгол нэгдлийн хөрөнгө оруулалтаар хэрэгжүүлэх төслүүдийг эцэслэх",c:"ЗГХЭГ-тай холбоотой",o:"Erdenetuya Ganbold",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Эхлээгүй",p:"",pg:0,ov:false,wk:false},
+  {id:32,n:"Бадрах энержи ХХК-д хараат бус олон нийтийн зөвлөл байгуулах",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:33,n:"Бадрах энержи ХХК-д олон улсын лаборатори байгуулах",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:34,n:"Бадрах энержи ХХК-д ТУЗ-д монголын талын төлөөлөл томилох",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:35,n:"Оюу толгой төслийн РТ талтай хийх зээлийн хүүгийн хэлэлцээг эрчимжүүлэх",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:36,n:"Оюу толгой төслийн РТ талтай хийх менежментийн үйлчилгээний төлбөрийг бууруулах хэлэлцээг эрчимжүүлэх",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:37,n:"Оюу толгой төслийн Онтре талтай хийх хэлэлцээг эрчимжүүлэх",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:38,n:"Стратегийн ордын төрийн эзэмшлийн хувь хэмжээг тогтоох хэлэлцээг эрчимжүүлэх",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:39,n:"Бизнес эрхлэгчдийн үйл ажиллагааг дэмжих чиглэлээр холбогдох дүрэм, журамд шинжилгээ хийж өөрчлөлт оруулах",c:"ЗГХЭГ-тай холбоотой",o:"Erdenetuya Ganbold",cl:"",st:"2026.04.09",due:"2026.07.09",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:40,n:"Олборлох үйлдвэрлэл, ил тод байдлын тухай хуулийн төслийн ажлын хэсэг",c:"Ажлын хэсэг",o:"Erdenetuya Ganbold",cl:"",st:"2026.04.21",due:"2026.07.01",s:"Хэрэгжиж байгаа",p:"",pg:0,ov:false,wk:false},
+  {id:41,n:"ТӨК-ийн засаглал, үр ашгийг нэмэгдүүлэх",c:"ЗГХЭГ-тай холбоотой",o:"Tsolmon Dorjderem",cl:"Tengis",st:"2026.04.09",due:"2026.07.09",s:"Эхлээгүй",p:"",pg:0,ov:false,wk:false},
+  {id:42,n:"Шинээр баригдах хотхон, үйлчилгээний газруудад цэнэглэх цэг байгуулах журам боловсруулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:43,n:"Цахилгаан машины зээлийн үзүүлэлтийг эцэслэн шалгана",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:44,n:"Ногоон дугаарын эдлэх эрхийг сайжруулан заасан журам боловсруулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:45,n:"Батерей хураагуур эсвэл тархмал эх үүсвэрийн нэг төсөл эхлүүлнэ",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:46,n:"Уур амьсгалын өөрчлөлтийн тухай хуулийн хэлэлцүүлгийг эцэслэж өргөн барих үйл явцыг эхлүүлнэ",c:"ЗГХЭГ-тай холбоотой",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:47,n:"Сургууль, цэцэрлэгүүдийг нарны эх үүсвэртэй холбох журмыг батална",c:"ЗГХЭГ-тай холбоотой",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:48,n:"Сургууль цэцэрлэгийг нарны эх үүсвэртэй холбох компаниудтай уулзах",c:"ЗГХЭГ-тай холбоотой",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:49,n:"Нарны эх үүсвэрт холбох сургууль, цэцэрлэгүүдийг сонгох",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:50,n:"Өрхийн хэмжээнд сэргээгдэхийн холболт хийх компаниудын жагсаалтыг шинэчлэх, журмыг шинээр батлах",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:51,n:"Өрхийн хэмжээнд сэргээгдэхийн холболт хийх компаниудад лизингийн эрх өгөх",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:52,n:"Ногоон шилжилтийн үндэсний хөтөлбөр, үйл ажиллагааны төлөвлөгөө бэлдэж батлуулна",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",cl:"",st:"",due:"",s:"",p:"",pg:0,ov:false,wk:false},
+  {id:53,n:"Монгол Улсын 2026 оны төсвийн тодотгол түүнтэй холбоотой баримтлах бодлогын саналыг боловсруулах",c:"ЗГХЭГ-тай холбоотой",o:"Sukh-Ochir Batsukh",cl:"",st:"2026.04.13",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:54,n:"Монгол Улсын 2027 оны төсвийг боловсруулах, баримтлах чиглэлийн санал боловсруулах",c:"ЗГХЭГ-тай холбоотой",o:"Sukh-Ochir Batsukh",cl:"",st:"2026.04.13",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:55,n:"Олон Улсын болон Монгол Улсын санхүү, эдийн засгийн 7 хоногийн тоймыг бэлтгэж хүргүүлэх",c:"ЗГХЭГ-тай холбоотой",o:"Sukh-Ochir Batsukh",cl:"",st:"2026.04.13",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:56,n:"Махны үнийн өсөлт, зах зээлийн нөхцөл байдлыг судлаж, арга хэмжээний санал боловсруулах",c:"ЗГХЭГ-тай холбоотой",o:"Sukh-Ochir Batsukh",cl:"",st:"2026.04.13",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:57,n:"2026-2027 оны өвөлжилтийн бэлтгэл ажлыг хангах, эрчим хүчний тасалдал үүсэхгүйгээр зохион байгуулах салбарын санал боловсруулах",c:"ЗГХЭГ-тай холбоотой",o:"Sukh-Ochir Batsukh",cl:"",st:"2026.04.10",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:58,n:"Гадаад бодлогын суурь зарчмыг тууштай баримталж, хоёр хөрш болон гуравдагч хөрш улсуудад таниулан харилцааны тэнцвэрийг хадгалах",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"",st:"2026.04.15",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:59,n:"Геополитикийн нөхцөл байдалд тохируулан гадаад бодлогын үйл ажиллагааны механизм, арга барилыг боловсронгуй болгох",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"",st:"2026.04.15",due:"",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,ov:false,wk:false},
+  {id:60,n:"Үндэсний сөрөн тэсвэрлэх стратеги боловсруулж батлуулахад дэмжлэг үзүүлнэ",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"",st:"2026.04.15",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:61,n:"БНСУ, Евро-Азийн эдийн засгийн холбоо, БНХАУ-тай эдийн засгийн түншлэл, чөлөөт худалдааны хэлэлцээрийг байгуулах",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"Sukh-Ochir",st:"2026.04.15",due:"",s:"Эхлээгүй",p:"",pg:0,ov:false,wk:false},
+  {id:62,n:"ШХАБ-ын Засгийн газрын тэргүүн нарын уулзалт, СПЭЗЧУ, ДЭЗЧУ-д Ерөнхий сайдыг оролцуулна",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"",st:"2026.04.15",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:63,n:"Цөлжилттэй тэмцэх тухай НҮБ-ын Конвенцын COP-17 дээд түвшний уулзалтын бэлтгэлийг хангахад дэмжлэг үзүүлнэ",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"",st:"2026.04.15",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:64,n:"Хилийн чанадад байгаа Монгол Улсын иргэний эрх ашгийг хамгаалах үйлчилгээний чанар, хүртээмжийг сайжруулна",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"",st:"2026.04.15",due:"",s:"Хэрэгжиж байгаа",p:"",pg:50,ov:false,wk:false},
+  {id:65,n:"ЭМ-ийн салбарын ажилтнуудын цалин хөлсний асуудал, ЭМ-ийн салбарт хэрэгжүүлэх арга хэмжээний төлөвлөгөөг ЗГ-аар батлуулах (ГБХНХЯ, ЭМЯ)",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",st:"2026.04.13",due:"2026.04.15",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:false},
+  {id:66,n:"Шинжлэх ухааны болон боловсролын салбарын багш ажилтнуудын цалингийн асуудлыг ЗГ-аар батлуулах (ГБХНХЯ, СЯ, БЯ)",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",st:"2026.04.16",due:"2026.04.22",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:false},
+  {id:67,n:"СӨБ, ЕБС, МБСБ-ын нэг суралцагчид оногдох хувьсах зардлыг шинэчлэх асуудлыг ЗГ-аар батлуулах (СЯ, БЯ)",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",st:"2026.04.16",due:"2026.04.22",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:false},
+  {id:68,n:"Монгол хүүхэд бүрийг мэдлэг, ур чадварын хоцрогдлоос чөлөөлөх арга хэмжээний төлөвлөгөөг ЗГ-аар батлуулах (БЯ)",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",st:"2026.04.16",due:"2026.04.22",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:false},
+  {id:69,n:"МУ-ыг 2027 онд хөгжүүлэх жилийн хөгжлийн төлөвлөгөөний төслийг ЕС-д танилцуулах, ЗГ-аар хэлэлцүүлж УИХ-д өргөн барих",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",st:"2026.04.20",due:"2026.05.31",s:"Дууссан",p:"Өндөр",pg:100,ov:false,wk:false},
+  {id:70,n:"ШУТ-ийн тухай хуульд нэмэлт, өөрчлөлт оруулах тухай хуулийн төслийг эцсийн хэлэлцүүлэгт бэлтгэх",c:"УИХ",o:"Ganbat Bulgaa",cl:"",st:"2026.04.27",due:"2026.05.15",s:"Дууссан",p:"Дунд",pg:100,ov:false,wk:false},
+  {id:71,n:"Эрүүл мэндийн өгөгдлийн үнэ цэн салбар дундын хамтын хэлэлцүүлэг",c:"Засгийн газар",o:"Tengis Sukhee",cl:"Nomin",st:"2026.04.30",due:"2026.05.01",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,ov:false,wk:true},
+  {id:72,n:"Google Chromebook-ийн үйлдвэр байгуулах асуудал (БЯ)",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",st:"2026.04.22",due:"2026.05.06",s:"Хэрэгжиж байгаа",p:"Дунд",pg:50,ov:false,wk:false},
+  {id:73,n:"Сургалтын зээлийн санг Боловсролын хөгжлийн сан болгох асуудал (БЯ)",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",st:"2026.04.22",due:"2026.05.06",s:"Хэрэгжиж байгаа",p:"Дунд",pg:50,ov:false,wk:false},
+  {id:74,n:"Экспортыг нэмэгдүүлэх ЗГ-ын тэмдэглэлийн хүрээнд хийх ажлуудыг хуваарилах, ЭЗХЯ-тай хамтран уулзалт зохион байгуулна",c:"Засгийн газар",o:"Erdenetuya Ganbold",cl:"",st:"2026.05.04",due:"2026.05.08",s:"Хэрэгжиж байгаа",p:"Дунд",pg:30,ov:false,wk:false},
+  {id:75,n:"БОУАӨЯ-тай хамтран натрийн цианидын бүртгэл хөтлөх, тээвэрлэх, хадгалах журмыг боловсруулах",c:"Засгийн газар",o:"Erdenetuya Ganbold",cl:"",st:"2026.05.04",due:"2026.08.01",s:"Эхлээгүй",p:"Дунд",pg:0,ov:false,wk:false},
+  {id:76,n:"Мэргэжлийн нэгдсэн холбооны тухай хуулийн нэмэлт өөрчлөлт батлагдсантай холбогдуулан холбоодын төлөөлөлтэй уулзалт хийх",c:"Засгийн газар",o:"Tengis Sukhee",cl:"Erdenetuya",st:"2026.05.18",due:"2026.05.22",s:"Эхлээгүй",p:"",pg:0,ov:false,wk:false},
+  {id:77,n:"Эрүүл мэндийн салбарын цахим шилжилтийг эрчимжүүлэх арга хэмжээний төлөвлөгөө гаргах",c:"Засгийн газар",o:"Nomin Ganbat",cl:"Tengis",st:"2026.04.30",due:"2026.05.01",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,ov:false,wk:true},
+];
+
+const URGENT=[
+  {no:'2',n:'2, 39-р сургуулиуд дээр ажиллах',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'2026.04.13',due:'2026.04.17',pg:100,ov:true,wk:false},
+  {no:'3',n:'ТЭЦ-4 станц дээр ажиллах',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'2026.04.13',due:'2026.04.17',pg:100,ov:true,wk:false},
+  {no:'4',n:'Онцгой, Татвартай рийл хийх',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'2026.04.13',due:'2026.04.17',pg:100,ov:true,wk:false},
+  {no:'5',n:'Мэдээллийн технологийн үйлдвэрлэлийг дэмжих үндэсний зөвлөлийн хурал',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'2026.04.20',due:'2026.04.21',pg:100,ov:true,wk:false},
+  {no:'6',n:'МУ-ыг 2027 онд хөгжүүлэх жилийн хөгжлийн төлөвлөгөөний теслийг ЕС-д танилцуулах',c:'УИХ',o:'Ganbat Bulgaa',st:'2026.04.20',due:'2026.04.24',pg:0,ov:true,wk:false},
+  {no:'7',n:'62-р сургуульд ажиллах',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'2026.04.22',due:'',pg:100,ov:false,wk:false},
+  {no:'8',n:'ЕС асуулгын цаг /Чуулган/',c:'УИХ',o:'Dashdemberel Lkhagvasuren',st:'2026.04.21',due:'2026.04.24',pg:0,ov:true,wk:false},
+  {no:'9',n:'СДМОХ удирдлагын бүтцийн арга хэмжээ Тэрэлжид',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'2026.04.22',due:'2026.04.25',pg:0,ov:true,wk:false},
+  {no:'10',n:'Боловсролын сайдтай БЗС-ын шинэчлэл, хүүхэд бүрийг компьютер ашиглах чадвартай болгох',c:'Ажлын алба',o:'Ganbat Bulgaa',st:'2026.04.22',due:'2026.04.25',pg:0,ov:true,wk:false},
+  {no:'11',n:'ChinaGAS Монгол Улсад хэрэгжүүлэх төслийн хөгжүүлэлтийн чиглэлээр уулзалт',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.04.27',pg:100,ov:false,wk:true},
+  {no:'12',n:'БНХАУ-ын Ханжоу Жинжянг группын Хөнгөн цагаан төсөл',c:'ЗГХЭГ-тай холбоотой',o:'Sukhbaatar Jamiyankhorloo',st:'',due:'2026.04.28',pg:100,ov:false,wk:true},
+  {no:'13',n:'Европийн холбоо Гадаад уулзалт',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.04.28',pg:100,ov:false,wk:true},
+  {no:'14',n:'НҮБ Гадаад уулзалт',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.04.29',pg:100,ov:false,wk:true},
+  {no:'15',n:'СОР17 Бэлтгэх ажилтай танилцах (Өрөө)',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.04.29',pg:100,ov:false,wk:true},
+  {no:'16',n:'Мон-Япон парламент төлөөлөгчидтэй уулзах Гадаад уулзалт',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.04.30',pg:100,ov:false,wk:true},
+  {no:'17',n:'Австрали Элчин Сайд Гадаад уулзалт',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.04.30',pg:100,ov:false,wk:true},
+  {no:'18',n:'E нам 3.0 апп нээлт',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'',due:'2026.05.01',pg:0,ov:false,wk:true},
+  {no:'19',n:'Монголын үйлдвэрчны эвлэл',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'',due:'2026.05.01',pg:0,ov:false,wk:true},
+  {no:'20',n:'Монголын эмэгтэйчүүдийн холбоо',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'',due:'2026.05.01',pg:0,ov:false,wk:true},
+  {no:'21',n:'SDY junior Залуусын бүтээмжийн хөтөлбөр',c:'Ажлын алба',o:'Tamir Erdene-Ochir',st:'',due:'2026.05.16',pg:0,ov:false,wk:false},
+  {no:'22',n:'Sputnik Mongolia',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.05.23',pg:0,ov:false,wk:false},
+  {no:'23',n:'Франц ЭС',c:'ЗГХЭГ-тай холбоотой',o:'Chimguundari Navaan-Yunden',st:'',due:'2026.05.11',pg:0,ov:false,wk:false},
+  {no:'24',n:'Chambers, IFIs meeting',c:'Ажлын алба',o:'Bulganchimeg Bayasgalan',st:'',due:'2026.05.06',pg:0,ov:false,wk:false},
+];
+
+const OWNERS=['Bulganchimeg Bayasgalan','Chimguundari Navaan-Yunden','Dashdemberel Lkhagvasuren','Erdenetuya Ganbold','Ganbat Bulgaa','Nomin Ganbat','Sukh-Ochir Batsukh','Tamir Erdene-Ochir','Tengis Sukhee','Tsolmon Dorjderem'];
+const CATS=['ЗГХЭГ-тай холбоотой','Засгийн газар','Ажлын алба','УИХ','Ажлын хэсэг'];
+const ADV=[
+  {n:'Bulganchimeg Bayasgalan',t:21,d:0,ip:0,pe:0,ov:0,avg:0, c:'#7c3aed'},
+  {n:'Tengis Sukhee',         t:16,d:6,ip:7,pe:3,ov:1,avg:43,c:'#2563eb'},
+  {n:'Erdenetuya Ganbold',    t:10,d:1,ip:5,pe:4,ov:1,avg:30,c:'#dc2626'},
+  {n:'Tsolmon Dorjderem',     t:8, d:0,ip:7,pe:1,ov:0,avg:43,c:'#0d9488'},
+  {n:'Ganbat Bulgaa',         t:8, d:6,ip:2,pe:0,ov:0,avg:87,c:'#ea580c'},
+  {n:'Chimguundari Navaan-Yunden',t:7,d:0,ip:6,pe:1,ov:0,avg:42,c:'#db2777'},
+  {n:'Sukh-Ochir Batsukh',    t:5, d:0,ip:5,pe:0,ov:0,avg:50,c:'#ca8a04'},
+  {n:'Tamir Erdene-Ochir',    t:1, d:0,ip:0,pe:1,ov:0,avg:0, c:'#64748b'},
+  {n:'Nomin Ganbat',          t:1, d:0,ip:1,pe:0,ov:0,avg:50,c:'#059669'},
+];
+
+// HELPERS
+function sbadge(s){
+  if(s==='Дууссан') return '<span class="badge b-d">Дууссан</span>';
+  if(s==='Хэрэгжиж байгаа') return '<span class="badge b-p">Хэрэгжиж байгаа</span>';
+  if(s==='Эхлээгүй') return '<span class="badge b-n">Эхлээгүй</span>';
+  return `<span class="badge b-n">${s||'—'}</span>`;
+}
+function pbar(pg){
+  const clr=pg>=100?'#16a34a':pg>0?'#2563eb':'#cbd5e1';
+  return `<div class="pw"><div class="pb"><div class="pf" style="width:${pg}%;background:${clr}"></div></div><span class="pp">${pg}%</span></div>`;
+}
+function ini(n){return n.split(' ').map(w=>w[0]||'').slice(0,2).join('');}
+
+// NAVIGATION
+const TITLES={dashboard:'Хяналтын самбар',tasks:'Ажлын сан',urgent:'Яаралтай чиглэл',mywork:'Миний ажил',weekly:'7 хоногийн тайлан',meetings:'Хурал & Уулзалт',settings:'Тохиргоо'};
+function go(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.getElementById('ptitle').textContent=TITLES[id]||'';
+}
+
+// DASHBOARD
+function buildDash(){
+  const show=TASKS.slice(0,12);
+  let h='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Хариуцагч</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
+  show.forEach(t=>{
+    const dc=t.ov?'dt-o':'dt-n';
+    h+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div><div class="tc">${t.c}</div></td><td style="font-size:11px;white-space:nowrap">${t.o.split(' ')[0]}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${t.due||'—'}</td><td>${pbar(t.pg)}</td><td>${sbadge(t.s)}</td></tr>`;
+  });
+  document.getElementById('dt-table').innerHTML=h+'</tbody>';
+
+  const cats=[{n:'ЗГХЭГ-тай холбоотой',c:27},{n:'Засгийн газар',c:22},{n:'Ажлын алба',c:17},{n:'УИХ',c:4},{n:'Ажлын хэсэг',c:1}];
+  document.getElementById('dt-cats').innerHTML=cats.map(c=>`<div class="cr"><span class="crn">${c.n}</span><div class="crbar"><div class="crfill" style="width:${Math.round(c.c/27*100)}%"></div></div><span class="crnum">${c.c}</span></div>`).join('');
+
+  document.getElementById('dt-advisors').innerHTML=ADV.map(a=>`
+    <div class="ar">
+      <div class="aa" style="background:${a.c}">${ini(a.n)}</div>
+      <div style="flex:1;min-width:0">
+        <div class="an">${a.n}</div>
+        <div class="ac">${a.t} ажил · ${a.d} дууссан · ${a.ov} хэтэрсэн · ${a.avg}% дундаж</div>
+        <div class="abar"><div class="afill" style="width:${a.avg||2}%;background:${a.c}"></div></div>
+      </div>
+      <div class="anum">${a.t}</div>
+    </div>`).join('');
+
+  const ov=TASKS.filter(t=>t.ov);
+  document.getElementById('dt-overdue').innerHTML=ov.map(t=>`
+    <div style="display:flex;align-items:flex-start;gap:9px;padding:9px 14px;border-bottom:1px solid #f1f5f9">
+      <div style="flex:1;min-width:0"><div class="tn">${t.n}</div><div class="tc">${t.o} · ${t.c}</div></div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:11px;font-weight:700;color:var(--rd);font-family:'JetBrains Mono',monospace">${t.due}</div>
+        <div style="font-size:10px;color:var(--gy)">${t.pg}%</div>
+      </div>
+    </div>`).join('');
+}
+
+// TASKS PAGE
+function initFilters(){
+  const os=document.getElementById('f-owner');
+  OWNERS.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;os.appendChild(op);});
+  const cs=document.getElementById('f-cat');
+  CATS.forEach(c=>{const op=document.createElement('option');op.value=c;op.textContent=c;cs.appendChild(op);});
+}
+function renderTasks(){
+  const owner=document.getElementById('f-owner').value;
+  const status=document.getElementById('f-status').value;
+  const cat=document.getElementById('f-cat').value;
+  const srch=document.getElementById('f-search').value.toLowerCase();
+  let fl=TASKS.filter(t=>{
+    if(owner&&t.o!==owner)return false;
+    if(status&&t.s!==status)return false;
+    if(cat&&t.c!==cat)return false;
+    if(srch&&!t.n.toLowerCase().includes(srch))return false;
+    return true;
+  });
+  document.getElementById('tc').textContent=`${fl.length} ажил`;
+  let h='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Хариуцагч</th><th>Хамтрагч</th><th>Эхлэх</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th><th>Чухал</th></tr></thead><tbody>';
+  if(!fl.length){h+='<tr><td colspan="9" class="nd">Ажил олдсонгүй</td></tr>';}
+  else fl.forEach(t=>{
+    const dc=t.ov?'dt-o':'dt-n';
+    const pr=t.p==='Өндөр'?'<span class="badge b-h">Өндөр</span>':'<span class="badge b-m">Дунд</span>';
+    h+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div><div class="tc">${t.c}</div></td><td style="font-size:11px">${t.o}</td><td style="font-size:11px;color:var(--gy)">${t.cl||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gy)">${t.st||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${t.due||'—'}</td><td>${pbar(t.pg)}</td><td>${sbadge(t.s)}</td><td>${pr}</td></tr>`;
+  });
+  document.getElementById('t-table').innerHTML=h+'</tbody>';
+}
+
+// URGENT
+function initUrgentFilters(){
+  // Owners
+  const uOwners=[...new Set(URGENT.map(u=>u.o).filter(o=>o))].sort();
+  const uos=document.getElementById('u-owner');
+  uOwners.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;uos.appendChild(op);});
+  // Cats
+  const uCats=[...new Set(URGENT.map(u=>u.c).filter(c=>c))].sort();
+  const ucs=document.getElementById('u-cat');
+  uCats.forEach(c=>{const op=document.createElement('option');op.value=c;op.textContent=c;ucs.appendChild(op);});
+}
+
+function renderUrgent(){
+  const owner=document.getElementById('u-owner').value;
+  const status=document.getElementById('u-status').value;
+  const cat=document.getElementById('u-cat').value;
+  const srch=document.getElementById('u-search').value.toLowerCase();
+
+  let fl=URGENT.filter(u=>{
+    if(owner&&u.o!==owner)return false;
+    if(cat&&u.c!==cat)return false;
+    if(srch&&!u.n.toLowerCase().includes(srch))return false;
+    if(status==='overdue'&&!u.ov)return false;
+    if(status==='week'&&(!u.wk||u.ov))return false;
+    if(status==='done'&&u.pg<100)return false;
+    if(status==='upcoming'&&(u.ov||u.wk||u.pg>=100))return false;
+    return true;
+  });
+
+  document.getElementById('uc').textContent=`${fl.length} ажил`;
+
+  let h='<thead><tr><th>№</th><th>Яаралтай ажлын нэр</th><th>Хариуцагч</th><th>Ангилал</th><th>Эхлэх</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
+  if(!fl.length){h+='<tr><td colspan="8" class="nd">Ажил олдсонгүй</td></tr>';}
+  else fl.forEach(u=>{
+    const dc=u.ov?'dt-o':'dt-n';
+    const badge=u.ov?'<span class="badge b-o">Хэтэрсэн</span>':u.pg>=100?'<span class="badge b-d">Дууссан</span>':u.wk?'<span class="badge b-wk">Энэ долоо хоногт</span>':'<span class="badge b-n">Хожмын</span>';
+    h+=`<tr><td><div style="width:22px;height:22px;border-radius:50%;background:var(--nv);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center">${u.no||'—'}</div></td><td><div class="tn">${u.n}</div></td><td style="font-size:11px;white-space:nowrap">${u.o}</td><td style="font-size:11px;color:var(--gy)">${u.c}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gy)">${u.st||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${u.due||'—'}</td><td>${pbar(u.pg)}</td><td>${badge}</td></tr>`;
+  });
+  document.getElementById('u-table').innerHTML=h+'</tbody>';
+}
+
+// MY WORK
+function initMyWork(){
+  const s=document.getElementById('my-owner');
+  OWNERS.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;s.appendChild(op);});
+}
+function renderMyWork(){
+  const owner=document.getElementById('my-owner').value;
+  if(!owner){
+    document.getElementById('my-title').textContent='Ажлын жагсаалт';
+    document.getElementById('my-count').textContent='—';
+    document.getElementById('my-table').innerHTML='<tbody><tr><td class="nd" colspan="7">Нэрээ сонгоно уу</td></tr></tbody>';
+    document.getElementById('my-stats').innerHTML='';
+    return;
+  }
+  const mt=TASKS.filter(t=>t.o===owner);
+  const d=mt.filter(t=>t.s==='Дууссан').length;
+  const ip=mt.filter(t=>t.s==='Хэрэгжиж байгаа').length;
+  const ov=mt.filter(t=>t.ov).length;
+  document.getElementById('my-title').textContent=owner+'-ийн ажлууд';
+  document.getElementById('my-count').textContent=`${mt.length} ажил`;
+  document.getElementById('my-stats').innerHTML=`
+    <div class="ms-item"><div class="sl">Нийт</div><div class="sv bl" style="font-size:22px">${mt.length}</div></div>
+    <div class="ms-item"><div class="sl">Дууссан</div><div class="sv gn" style="font-size:22px">${d}</div></div>
+    <div class="ms-item"><div class="sl">Хэрэгжиж байгаа</div><div class="sv am" style="font-size:22px">${ip}</div></div>
+    <div class="ms-item"><div class="sl">Хэтэрсэн</div><div class="sv rd" style="font-size:22px">${ov}</div></div>`;
+  if(!mt.length){
+    document.getElementById('my-table').innerHTML='<tbody><tr><td class="nd" colspan="7">Ажил олдсонгүй</td></tr></tbody>';
+    return;
+  }
+  let h='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Ангилал</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th><th>Чухал</th></tr></thead><tbody>';
+  mt.forEach(t=>{
+    const dc=t.ov?'dt-o':'dt-n';
+    const pr=t.p==='Өндөр'?'<span class="badge b-h">Өндөр</span>':'<span class="badge b-m">Дунд</span>';
+    h+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div></td><td style="font-size:11px;color:var(--gy)">${t.c}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${t.due||'—'}</td><td>${pbar(t.pg)}</td><td>${sbadge(t.s)}</td><td>${pr}</td></tr>`;
+  });
+  document.getElementById('my-table').innerHTML=h+'</tbody>';
+}
+
+// WEEKLY
+function buildWeekly(){
+  const wk=TASKS.filter(t=>t.wk);
+  const ov=TASKS.filter(t=>t.ov);
+  let h='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Хариуцагч</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
+  wk.forEach(t=>{
+    h+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div><div class="tc">${t.c}</div></td><td style="font-size:11px">${t.o}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="dt-n">${t.due}</td><td>${pbar(t.pg)}</td><td>${sbadge(t.s)}</td></tr>`;
+  });
+  document.getElementById('wk-table').innerHTML=h+'</tbody>';
+  let h2='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Хариуцагч</th><th>Хэтэрсэн огноо</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
+  ov.forEach(t=>{
+    h2+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div><div class="tc">${t.c}</div></td><td style="font-size:11px">${t.o}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="dt-o">${t.due}</td><td>${pbar(t.pg)}</td><td><span class="badge b-o">Хэтэрсэн</span></td></tr>`;
+  });
+  document.getElementById('wk-over-table').innerHTML=h2+'</tbody>';
+}
+
+// ӨНӨӨДРИЙН ОГНОО
+(function(){
+  const days=["Ням","Даваа","Мягмар","Лхагва","Пүрэв","Баасан","Бямба"];
+  const now=new Date();
+  const y=now.getFullYear();
+  const m=String(now.getMonth()+1).padStart(2,"0");
+  const d=String(now.getDate()).padStart(2,"0");
+  const dn=days[now.getDay()];
+  document.getElementById("today-date").textContent=`${y}.${m}.${d} · ${dn} гараг`;
+})();
+
+// INIT
+buildDash();
+initFilters();
+renderTasks();
+initUrgentFilters();
+renderUrgent();
+initMyWork();
+buildWeekly();
+</script>
+</body>
+</html>
