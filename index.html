@@ -692,7 +692,7 @@ function pbar(pg){
 function ini(n){return n.split(' ').map(w=>w[0]||'').slice(0,2).join('');}
 
 const OWNERS=["Batkhuu Otgon","Bulganchimeg Bayasgalan","Chimguundari Navaan-Yunden","Erdenetuya Ganbold","Ganbat Bulgaa","Nomin Ganbaatar","Sukh-Ochir Batsukh","Tamir Erdene-Ochir","Tengis Sukhee","Tsolmon Dorjderem"];
-const CATS=['Ажлын алба','Засгийн газар','ЗГХЭГ-тай холбоотой','УИХ','Ажлын хэсэг'];
+const CATS=['Ажлын алба','Засгийн газар','ЗГХЭГ-тай холбоотой','УИХ','Ажлын хэсэг','МАН','Хурал','Уулзалт','Цаг авах'];
 // NAVIGATION
 const TITLES={dashboard:'Хяналтын самбар',tasks:'Ажлын сан',urgent:'Яаралтай чиглэл',mywork:'Миний ажил',weekly:'7 хоногийн тайлан',meetings:'Хурал & Уулзалт',settings:'Тохиргоо'};
 function go(id,el){
@@ -727,6 +727,7 @@ function renderDashboard(){
   // Filter urgent
   let fu=URGENT.filter(u=>{
     if(owner&&!u.o.split(',').map(s=>s.trim()).includes(owner))return false;
+    if(cat&&u.c!==cat)return false;
     return true;
   });
 
