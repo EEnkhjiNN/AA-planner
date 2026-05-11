@@ -147,7 +147,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
     <div class="ns">Үндсэн</div>
     <div class="ni active" onclick="go('dashboard',this)"><span class="ni-ic">◼</span>Хяналтын самбар</div>
     <div class="ni" onclick="go('tasks',this)"><span class="ni-ic">☰</span>Ажлын сан<span class="nbr nb-g">124</span></div>
-    <div class="ni" onclick="go('urgent',this)"><span class="ni-ic">⚡</span>Яаралтай чиглэл<span class="nbr nb-r">39</span></div>
+    <div class="ni" onclick="go('urgent',this)"><span class="ni-ic">⚡</span>Яаралтай чиглэл<span class="nbr nb-r">40</span></div>
     <div class="ns">Миний</div>
     <div class="ni" onclick="go('mywork',this)"><span class="ni-ic">👤</span>Миний ажил</div>
     <div class="ni" onclick="go('weekly',this)"><span class="ni-ic">📅</span>7 хоногийн тайлан</div>
@@ -255,8 +255,8 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
     <!-- ЯАРАЛТАЙ ЧИГЛЭЛ -->
     <div id="pg-urgent" class="page">
       <div class="sg">
-        <div class="sc s-bl"><div class="sl">Нийт яаралтай</div><div class="sv bl">39</div></div>
-        <div class="sc s-rd"><div class="sl">Хэтэрсэн</div><div class="sv rd">24</div><div class="ss">Яаралтай дэмжлэг</div></div>
+        <div class="sc s-bl"><div class="sl">Нийт яаралтай</div><div class="sv bl">40</div></div>
+        <div class="sc s-rd"><div class="sl">Хэтэрсэн</div><div class="sv rd">5</div><div class="ss">Яаралтай дэмжлэг</div></div>
         <div class="sc s-am"><div class="sl">Энэ 7 хоногт</div><div class="sv am">11</div><div class="ss">05.11–05.17</div></div>
         <div class="sc s-tl"><div class="sl">Дууссан</div><div class="sv tl">21</div><div class="ss">100% гүйцэтгэлтэй</div></div>
       </div>
@@ -625,45 +625,46 @@ const TASKS=[
   {id:124,n:"Мэргэжлийн нэгдсэн холбоог бүртгэхтэй холбоотой журам, бэлтгэл ажлуудыг хангах",c:"Засгийн газар",o:"Tengis Sukhee",cl:"",st:"2026.05.11",due:"2026.05.22",s:"Эхлээгүй",p:"",pg:0,ov:false,wk:false},
 ];
 const URGENT=[
-  {no:"2",n:"2, 39-р сургуулиуд дээр ажиллах ",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.13",due:"2026.04.17",pg:100,ov:true,wk:false},
-  {no:"3",n:"ТЭЦ-4 станц дээр ажиллах",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.13",due:"2026.04.17",pg:100,ov:true,wk:false},
-  {no:"4",n:"Онцгой, Татвартай рийл хийх",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.13",due:"2026.04.17",pg:100,ov:true,wk:false},
-  {no:"5",n:"Мэдээллийн технологийн үйлдвэрлэлийг дэмжих үндэсний зөвлөлийн хуралд ЕС оролцохтой холбоотой бэлтгэх ",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.20",due:"2026.04.21",pg:100,ov:true,wk:false},
-  {no:"6",n:"МУ-ыг 2027 онд хөгжүүлэх жилийн хөгжлийн төлөвлөгөөний төслийг ЕС-д танилцуулах, ЗГ-ийн хуралдаанаар хэлэлцүүлж УИХ-д өргөн барих",c:"УИХ",o:"Ganbat Bulgaa",st:"2026.04.20",due:"2026.04.24",pg:100,ov:true,wk:false},
+  {no:"1",n:"Баянгол дүүргийн эмнэлэгт ажиллах",c:"Ажлын алба",o:"Dashdemberel Lkhagvasuren",st:"2026.04.13",due:"2026.04.13",pg:0,ov:true,wk:false},
+  {no:"2",n:"2, 39-р сургуулиуд дээр ажиллах",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.13",due:"2026.04.17",pg:100,ov:false,wk:false},
+  {no:"3",n:"ТЭЦ-4 станц дээр ажиллах",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.13",due:"2026.04.17",pg:100,ov:false,wk:false},
+  {no:"4",n:"Онцгой, Татвартай рийл хийх",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.13",due:"2026.04.17",pg:100,ov:false,wk:false},
+  {no:"5",n:"Мэдээллийн технологийн үйлдвэрлэлийг дэмжих үндэсний зөвлөлийн хуралд ЕС оролцохтой холбоотой бэлтгэх",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.20",due:"2026.04.21",pg:100,ov:false,wk:false},
+  {no:"6",n:"МУ-ыг 2027 онд хөгжүүлэх жилийн хөгжлийн төлөвлөгөөний төслийг ЕС-д танилцуулах, ЗГ-ийн хуралдаанаар хэлэлцүүлж УИХ-д өргөн барих",c:"УИХ",o:"Ganbat Bulgaa",st:"2026.04.20",due:"2026.04.24",pg:100,ov:false,wk:false},
   {no:"7",n:"62-р сургуульд ажиллах",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.04.22",due:"",pg:100,ov:false,wk:false},
-  {no:"8",n:"ЕС асуулгын цаг /Чуулган/",c:"Ажлын алба",o:"Dashdemberel Lkhagvasuren",st:"2026.04.17",due:"2026.04.24",pg:100,ov:true,wk:false},
-  {no:"9",n:"СДМОХ удирдлагын бүтцийн арга хэмжээ Тэрэлжид",c:"МАН",o:"Tamir Erdene-Ochir",st:"2026.04.25",due:"2026.04.25",pg:100,ov:true,wk:false},
-  {no:"11",n:"ChinaGAS Монгол Улсад хэрэгжүүлэх төслийн хөгжүүлэлтийн танилцуулга  ",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Bulganchimeg Bayasgalan, Sukh-Ochir Batsukh",st:"2026.04.27",due:"2026.04.27",pg:100,ov:true,wk:false},
-  {no:"12",n:" БНХАУ-ын Ханжоу Жинжянг группын Хөнгөн цагаан төсөл.  Гадаад уулзалт",c:"Уулзалт",o:"Sukhbaatar Jamiyankhorloo",st:"2026.04.28",due:"2026.04.28",pg:100,ov:true,wk:false},
-  {no:"13",n:"Европийн холбоо Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Dashdemberel Lkhagvasuren",st:"2026.04.28",due:"2026.04.28",pg:100,ov:true,wk:false},
-  {no:"14",n:"НҮБ Гадаад уулзалт ",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Dashdemberel Lkhagvasuren",st:"2026.04.29",due:"2026.04.29",pg:100,ov:true,wk:false},
-  {no:"15",n:"СОР17 Бэлтгэх ажилтай танилцах (Өрөө)",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Dashdemberel Lkhagvasuren, Bulganchimeg Bayasgalan",st:"2026.04.29",due:"2026.04.29",pg:100,ov:true,wk:false},
-  {no:"16",n:"Мон-Япон парламент төлөөлөгчидтэй уулзах Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Tamir Erdene-Ochir",st:"2026.04.30",due:"2026.04.30",pg:100,ov:true,wk:false},
-  {no:"17",n:"Австрали Элчин Сайд Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden",st:"2026.04.30",due:"2026.04.30",pg:100,ov:true,wk:false},
-  {no:"18",n:"E нам 3.0 апп нээлт ",c:"МАН",o:"Tamir Erdene-Ochir",st:"2026.05.01",due:"2026.05.01",pg:100,ov:true,wk:false},
-  {no:"19",n:"Монголын үйлдвэрчны эвлэл",c:"Цаг авах",o:"Tamir Erdene-Ochir",st:"2026.04.26",due:"2026.05.01",pg:100,ov:true,wk:false},
+  {no:"8",n:"ЕС асуулгын цаг /Чуулган/",c:"Ажлын алба",o:"Dashdemberel Lkhagvasuren",st:"2026.04.17",due:"2026.04.24",pg:100,ov:false,wk:false},
+  {no:"9",n:"СДМОХ удирдлагын бүтцийн арга хэмжээ Тэрэлжид",c:"МАН",o:"Tamir Erdene-Ochir",st:"2026.04.25",due:"2026.04.25",pg:100,ov:false,wk:false},
+  {no:"10",n:"ChinaGAS Монгол Улсад хэрэгжүүлэх төслийн хөгжүүлэлтийн танилцуулга",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Bulganchimeg Bayasgalan, Sukh-Ochir Batsukh",st:"2026.04.27",due:"2026.04.27",pg:100,ov:false,wk:false},
+  {no:"11",n:"БНХАУ-ын Ханжоу Жинжянг группын Хөнгөн цагаан төсөл. Гадаад уулзалт",c:"Уулзалт",o:"Sukhbaatar Jamiyankhorloo",st:"2026.04.28",due:"2026.04.28",pg:100,ov:false,wk:false},
+  {no:"12",n:"Европийн холбоо Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Dashdemberel Lkhagvasuren",st:"2026.04.28",due:"2026.04.28",pg:100,ov:false,wk:false},
+  {no:"13",n:"НҮБ Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Dashdemberel Lkhagvasuren",st:"2026.04.29",due:"2026.04.29",pg:100,ov:false,wk:false},
+  {no:"14",n:"СОР17 Бэлтгэх ажилтай танилцах (Өрөө)",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Dashdemberel Lkhagvasuren, Bulganchimeg Bayasgalan",st:"2026.04.29",due:"2026.04.29",pg:100,ov:false,wk:false},
+  {no:"15",n:"Мон-Япон парламент төлөөлөгчидтэй уулзах Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden, Tamir Erdene-Ochir",st:"2026.04.30",due:"2026.04.30",pg:100,ov:false,wk:false},
+  {no:"16",n:"Австрали Элчин Сайд Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden",st:"2026.04.30",due:"2026.04.30",pg:100,ov:false,wk:false},
+  {no:"17",n:"E нам 3.0 апп нээлт",c:"МАН",o:"Tamir Erdene-Ochir",st:"2026.05.01",due:"2026.05.01",pg:100,ov:false,wk:false},
+  {no:"18",n:"Олон улсын зөвлөх үйлчилгээ үзүүлдэг компани, байгууллагуудтай байгуулсан гэрээний хэрэгжилтийн үнэлгээ хийх",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",st:"2026.05.01",due:"2026.06.09",pg:0,ov:false,wk:false},
+  {no:"19",n:"Монголын үйлдвэрчны эвлэл",c:"Цаг авах",o:"Tamir Erdene-Ochir",st:"2026.04.26",due:"2026.05.01",pg:100,ov:false,wk:false},
   {no:"20",n:"Монголын эмэгтэйчүүдийн холбоо",c:"Цаг авах",o:"Tamir Erdene-Ochir",st:"2026.04.27",due:"2026.05.15",pg:0,ov:false,wk:true},
   {no:"21",n:"Франц ЭС",c:"Уулзалт",o:"Chimguundari Navaan-Yunden",st:"2026.04.30",due:"2026.05.11",pg:0,ov:false,wk:true},
-  {no:"22",n:"Chambers, IFIs meeting",c:"Хурал",o:"Bulganchimeg Bayasgalan",st:"2026.05.06",due:"2026.05.06",pg:100,ov:true,wk:false},
-  {no:"23",n:"Шилдэг татвар төлөгчлөл шагнал гардуулах",c:"ЗГХЭГ-тай холбоотой",o:"Tamir Erdene-Ochir",st:"2026.05.04",due:"2026.05.04",pg:100,ov:true,wk:false},
-  {no:"24",n:"Хөрөнгө оруулагчдын уулзалт",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",st:"2026.05.04",due:"2026.05.08",pg:100,ov:true,wk:false},
-  {no:"25",n:"ногоон зээлийн акц",c:"Уулзалт",o:"Bulganchimeg Bayasgalan",st:"2026.05.04",due:"2026.05.08",pg:0,ov:true,wk:false},
-  {no:"26",n:"Олон улсын зөвлөх үйлчилгээ үзүүлдэг компани, байгууллагуудтай байгуулсан гэрээний хэрэгжилтийн үнэлгээ хийх",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",st:"2026.05.01",due:"2026.06.09",pg:0,ov:false,wk:false},
-  {no:"27",n:"Энэтхэгийн Элчин сайдтай Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden",st:"2026.05.07",due:"2026.05.07",pg:0,ov:true,wk:false},
-  {no:"35",n:"МОНГОЛ ЗАЛУУСЫГ УР ЧАДВАРЫН ХОЦРОГДЛООС ЧӨЛӨӨЛЬЕ: Мэргэжлийн болон техникийн боловсролын шинэчлэлийн замын зураг танилцуулах арга хэмжээ ",c:"Хурал",o:"Ganbat Bulgaa",st:"2026.05.07",due:"2026.05.07",pg:100,ov:true,wk:false},
-  {no:"36",n:"Стратегийн ордын тусгай зөвшөөрөл эзэмшигч нар",c:"Уулзалт",o:"Tsolmon Dorjderem",st:"2026.05.07",due:"2026.05.07",pg:0,ov:true,wk:false},
-  {no:"33",n:"Хөдөлмөрийн баатруудыг хүлээж авах",c:"ЗГХЭГ-тай холбоотой",o:"Tamir Erdene-Ochir",st:"2026.05.08",due:"2026.05.08",pg:0,ov:true,wk:false},
-  {no:"38",n:"Францын Элчин сайд. Гадаад уулзалт",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.11",due:"2026.05.11",pg:50,ov:false,wk:true},
-  {no:"39",n:"НҮБ-ын Хүний эрхийн Дээд комиссар. Гадаад уулзалт",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.11",due:"2026.05.11",pg:50,ov:false,wk:true},
-  {no:"40",n:"Бидний ирээдүй- Нийтийн эрүүл мэнд хэлэлцүүлэг",c:"Ажлын алба",o:"Nomin Ganbaatar",st:"2026.05.12",due:"2026.05.12",pg:0,ov:false,wk:true},
-  {no:"41",n:"SDW Шинэ гишүүд",c:"Ажлын алба",o:"Tuul Dashgerel",st:"2026.05.14",due:"2026.05.14",pg:0,ov:false,wk:true},
-  {no:"42",n:"Энэтхэг элчин сайд",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.14",due:"2026.05.14",pg:0,ov:false,wk:true},
-  {no:"34",n:"Орон нутагт ажиллах",c:"Засгийн газар",o:"Tamir Erdene-Ochir",st:"2026.05.15",due:"2026.05.16",pg:0,ov:false,wk:true},
-  {no:"37",n:"Мянганы сорилтын сан хаалтын арга хэмжээ",c:"Ажлын алба",o:"Tamir Erdene-Ochir, Chimguundari Navaan-Yunden",st:"2026.05.15",due:"2026.05.15",pg:0,ov:false,wk:true},
-  {no:"29",n:"SDY junior Залуусын бүтээмжийн хөтөлбөр",c:"МАН",o:"Tamir Erdene-Ochir",st:"2026.05.16",due:"2026.05.16",pg:0,ov:false,wk:true},
-  {no:"31",n:"Үндэсний соёл, номын өдрүүд",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.05.16",due:"2026.05.17",pg:0,ov:false,wk:true},
-  {no:"30",n:"Спутник агентлагийн нээлтэд ЕС-ыг оролцуулах",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.23",due:"2026.05.23",pg:0,ov:false,wk:false},
-  {no:"32",n:"Олон улсын хүүхдийн эрхийг хамгаалах өдөр",c:"ЗГХЭГ-тай холбоотой",o:"Tamir Erdene-Ochir",st:"2026.06.01",due:"2026.07.01",pg:0,ov:false,wk:false},
+  {no:"22",n:"Шилдэг татвар төлөгчлөл шагнал гардуулах",c:"ЗГХЭГ-тай холбоотой",o:"Tamir Erdene-Ochir",st:"2026.05.04",due:"2026.05.04",pg:100,ov:false,wk:false},
+  {no:"23",n:"Хөрөнгө оруулагчдын уулзалт",c:"Ажлын алба",o:"Bulganchimeg Bayasgalan",st:"2026.05.04",due:"2026.05.08",pg:100,ov:false,wk:false},
+  {no:"24",n:"ногоон зээлийн акц",c:"Уулзалт",o:"Bulganchimeg Bayasgalan",st:"2026.05.04",due:"2026.05.08",pg:0,ov:true,wk:false},
+  {no:"25",n:"Chambers, IFIs meeting",c:"Хурал",o:"Bulganchimeg Bayasgalan",st:"2026.05.06",due:"2026.05.06",pg:100,ov:false,wk:false},
+  {no:"26",n:"Энэтхэгийн Элчин сайдтай Гадаад уулзалт",c:"Уулзалт",o:"Chimguundari Navaan-Yunden",st:"2026.05.07",due:"2026.05.07",pg:0,ov:true,wk:false},
+  {no:"27",n:"МОНГОЛ ЗАЛУУСЫГ УР ЧАДВАРЫН ХОЦРОГДЛООС ЧӨЛӨӨЛЬЕ: Мэргэжлийн болон техникийн боловсролын шинэчлэлийн замын зураг танилцуулах",c:"Хурал",o:"Ganbat Bulgaa",st:"2026.05.07",due:"2026.05.07",pg:100,ov:false,wk:false},
+  {no:"28",n:"Стратегийн ордын тусгай зөвшөөрөл эзэмшигч нар",c:"Уулзалт",o:"Tsolmon Dorjderem",st:"2026.05.07",due:"2026.05.07",pg:0,ov:true,wk:false},
+  {no:"29",n:"Хөдөлмөрийн баатруудыг хүлээж авах",c:"ЗГХЭГ-тай холбоотой",o:"Tamir Erdene-Ochir",st:"2026.05.08",due:"2026.05.08",pg:0,ov:true,wk:false},
+  {no:"30",n:"Францын Элчин сайд. Гадаад уулзалт",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.11",due:"2026.05.11",pg:50,ov:false,wk:true},
+  {no:"31",n:"НҮБ-ын Хүний эрхийн Дээд комиссар. Гадаад уулзалт",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.11",due:"2026.05.11",pg:50,ov:false,wk:true},
+  {no:"32",n:"Бидний ирээдүй- Нийтийн эрүүл мэнд хэлэлцүүлэг",c:"Ажлын алба",o:"Nomin Ganbaatar",st:"2026.05.12",due:"2026.05.12",pg:0,ov:false,wk:true},
+  {no:"33",n:"SDW Шинэ гишүүд",c:"Ажлын алба",o:"Tuul Dashgerel",st:"2026.05.14",due:"2026.05.14",pg:0,ov:false,wk:true},
+  {no:"34",n:"Энэтхэг элчин сайд",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.14",due:"2026.05.14",pg:0,ov:false,wk:true},
+  {no:"35",n:"Орон нутагт ажиллах",c:"Засгийн газар",o:"Tamir Erdene-Ochir",st:"2026.05.15",due:"2026.05.16",pg:0,ov:false,wk:true},
+  {no:"36",n:"Мянганы сорилтын сан хаалтын арга хэмжээ",c:"Ажлын алба",o:"Tamir Erdene-Ochir, Chimguundari Navaan-Yunden",st:"2026.05.15",due:"2026.05.15",pg:0,ov:false,wk:true},
+  {no:"37",n:"SDY junior Залуусын бүтээмжийн хөтөлбөр",c:"МАН",o:"Tamir Erdene-Ochir",st:"2026.05.16",due:"2026.05.16",pg:0,ov:false,wk:true},
+  {no:"38",n:"Үндэсний соёл, номын өдрүүд",c:"Ажлын алба",o:"Tamir Erdene-Ochir",st:"2026.05.16",due:"2026.05.17",pg:0,ov:false,wk:true},
+  {no:"39",n:"Спутник агентлагийн нээлтэд ЕС-ыг оролцуулах",c:"Ажлын алба",o:"Chimguundari Navaan-Yunden",st:"2026.05.23",due:"2026.05.23",pg:0,ov:false,wk:false},
+  {no:"40",n:"Олон улсын хүүхдийн эрхийг хамгаалах өдөр",c:"ЗГХЭГ-тай холбоотой",o:"Tamir Erdene-Ochir",st:"2026.06.01",due:"2026.07.01",pg:0,ov:false,wk:false},
 ];
 const ADV=[
   {n:"Bulganchimeg Bayasgalan",t:28,d:3,ip:19,pe:6,ov:6,avg:44,c:"#7c3aed"},
