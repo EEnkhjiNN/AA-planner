@@ -290,6 +290,17 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         </div>
         <div class="ms-grid" id="my-stats"></div>
       </div>
+      <!-- ТАБУУД -->
+      <div style="display:flex;gap:8px;margin-bottom:14px">
+        <button id="tab-tasks" onclick="switchMyTab('tasks')"
+          style="padding:8px 20px;border-radius:8px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;background:var(--bl);color:#fff">
+          📋 Ажлын сан
+        </button>
+        <button id="tab-urgent" onclick="switchMyTab('urgent')"
+          style="padding:8px 20px;border-radius:8px;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;background:var(--lt);color:var(--gy)">
+          ⚠️ Яаралтай ажил
+        </button>
+      </div>
       <div class="card">
         <div class="ch"><span class="ct2" id="my-title">Ажлын жагсаалт</span><span class="cm" id="my-count">—</span></div>
         <div class="tw"><table id="my-table"></table></div>
@@ -904,37 +915,88 @@ function initMyWork(){
   const s=document.getElementById('my-owner');
   OWNERS.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;s.appendChild(op);});
 }
+let myTab='tasks';
+function switchMyTab(tab){
+  myTab=tab;
+  document.getElementById('tab-tasks').style.background  = tab==='tasks'?'var(--bl)':'var(--lt)';
+  document.getElementById('tab-tasks').style.color       = tab==='tasks'?'#fff':'var(--gy)';
+  document.getElementById('tab-urgent').style.background = tab==='urgent'?'#b91c1c':'var(--lt)';
+  document.getElementById('tab-urgent').style.color      = tab==='urgent'?'#fff':'var(--gy)';
+  renderMyWork();
+}
 function renderMyWork(){
   const owner=document.getElementById('my-owner').value;
   if(!owner){
     document.getElementById('my-title').textContent='Ажлын жагсаалт';
     document.getElementById('my-count').textContent='—';
-    document.getElementById('my-table').innerHTML='<tbody><tr><td class="nd" colspan="7">Нэрээ сонгоно уу</td></tr></tbody>';
+    document.getElementById('my-table').innerHTML='<tbody><tr><td class="nd" colspan="8">Нэрээ сонгоно уу</td></tr></tbody>';
     document.getElementById('my-stats').innerHTML='';
     return;
   }
-  const mt=TASKS.filter(t=>t.o===owner);
-  const d=mt.filter(t=>t.s==='Дууссан').length;
-  const ip=mt.filter(t=>t.s==='Хэрэгжиж байгаа').length;
-  const ov=mt.filter(t=>t.ov).length;
-  document.getElementById('my-title').textContent=owner+'-ийн ажлууд';
-  document.getElementById('my-count').textContent=`${mt.length} ажил`;
+
+  // Хоёр эхийн статистик
+  const mt  = TASKS.filter(t=>t.o===owner||t.cl===owner);
+  const mu  = URGENT.filter(u=>u.o===owner||u.o.includes(owner));
+  const t_d = mt.filter(t=>t.dn).length;
+  const t_ov= mt.filter(t=>t.ov).length;
+  const t_act= mt.length - t_d - t_ov;
+  const u_d = mu.filter(u=>u.pg>=100).length;
+  const u_ov= mu.filter(u=>u.ov).length;
+  const u_act= mu.length - u_d - u_ov;
+
   document.getElementById('my-stats').innerHTML=`
-    <div class="ms-item"><div class="sl">Нийт</div><div class="sv bl" style="font-size:22px">${mt.length}</div></div>
-    <div class="ms-item"><div class="sl">Дууссан</div><div class="sv gn" style="font-size:22px">${d}</div></div>
-    <div class="ms-item"><div class="sl">Хэрэгжиж байгаа</div><div class="sv am" style="font-size:22px">${ip}</div></div>
-    <div class="ms-item"><div class="sl">Хэтэрсэн</div><div class="sv rd" style="font-size:22px">${ov}</div></div>`;
-  if(!mt.length){
-    document.getElementById('my-table').innerHTML='<tbody><tr><td class="nd" colspan="7">Ажил олдсонгүй</td></tr></tbody>';
-    return;
+    <div class="ms-item" style="border-bottom:3px solid var(--bl)">
+      <div class="sl">Ажлын сан</div>
+      <div class="sv bl" style="font-size:22px">${mt.length}</div>
+      <div style="font-size:10px;color:var(--gy);margin-top:2px">${t_d} дууссан · ${t_ov} хоцорсон</div>
+    </div>
+    <div class="ms-item" style="border-bottom:3px solid #b91c1c">
+      <div class="sl">Яаралтай ажил</div>
+      <div class="sv rd" style="font-size:22px">${mu.length}</div>
+      <div style="font-size:10px;color:var(--gy);margin-top:2px">${u_d} дууссан · ${u_ov} хоцорсон</div>
+    </div>
+    <div class="ms-item" style="border-bottom:3px solid var(--gn)">
+      <div class="sl">Нийт дууссан</div>
+      <div class="sv gn" style="font-size:22px">${t_d+u_d}</div>
+      <div style="font-size:10px;color:var(--gy);margin-top:2px">${mt.length+mu.length} ажлаас</div>
+    </div>
+    <div class="ms-item" style="border-bottom:3px solid var(--rd)">
+      <div class="sl">Нийт хоцорсон</div>
+      <div class="sv rd" style="font-size:22px">${t_ov+u_ov}</div>
+      <div style="font-size:10px;color:var(--gy);margin-top:2px">Яаралтай анхаарал</div>
+    </div>`;
+
+  // ТАБ-аас хамаарч харуулах өгөгдөл
+  if(myTab==='tasks'){
+    document.getElementById('my-title').textContent=owner+' — Ажлын сан';
+    document.getElementById('my-count').textContent=`${mt.length} ажил`;
+    if(!mt.length){
+      document.getElementById('my-table').innerHTML='<tbody><tr><td class="nd" colspan="7">Ажил олдсонгүй</td></tr></tbody>';
+      return;
+    }
+    let h='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Ангилал</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th><th>Чухал</th></tr></thead><tbody>';
+    mt.forEach(t=>{
+      const dc=t.ov?'dt-o':'dt-n';
+      const pr=t.p==='Өндөр'?'<span class="badge b-h">Өндөр</span>':'<span class="badge b-m">Дунд</span>';
+      h+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div><div style="font-size:10px;color:var(--gy)">${t.c}</div></td><td style="font-size:11px;color:var(--gy)">${t.cl?'🤝 '+t.cl:''}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${t.due||'—'}</td><td>${pbar(t.pg)}</td><td>${sbadge(t.s)}</td><td>${pr}</td></tr>`;
+    });
+    document.getElementById('my-table').innerHTML=h+'</tbody>';
+  } else {
+    document.getElementById('my-title').textContent=owner+' — Яаралтай ажил';
+    document.getElementById('my-count').textContent=`${mu.length} ажил`;
+    if(!mu.length){
+      document.getElementById('my-table').innerHTML='<tbody><tr><td class="nd" colspan="6">Яаралтай ажил олдсонгүй</td></tr></tbody>';
+      return;
+    }
+    let h='<thead><tr><th>#</th><th>Яаралтай ажлын нэр</th><th>Ангилал</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
+    mu.forEach(u=>{
+      const dc=u.ov?'dt-o':'dt-n';
+      const done=u.pg>=100;
+      const badge=u.ov?'<span class="badge b-o">⚠ Хоцорсон</span>':done?'<span class="badge b-d">✓ Дууссан</span>':'<span class="badge b-a">→ Хэрэгжиж буй</span>';
+      h+=`<tr><td class="ic">${u.no}</td><td><div class="tn">${u.n}</div><div style="font-size:10px;color:var(--gy)">${u.c}</div></td><td style="font-size:11px;color:var(--gy)">${u.o}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${u.due||'—'}</td><td>${pbar(u.pg)}</td><td>${badge}</td></tr>`;
+    });
+    document.getElementById('my-table').innerHTML=h+'</tbody>';
   }
-  let h='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Ангилал</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th><th>Чухал</th></tr></thead><tbody>';
-  mt.forEach(t=>{
-    const dc=t.ov?'dt-o':'dt-n';
-    const pr=t.p==='Өндөр'?'<span class="badge b-h">Өндөр</span>':'<span class="badge b-m">Дунд</span>';
-    h+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div></td><td style="font-size:11px;color:var(--gy)">${t.c}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${t.due||'—'}</td><td>${pbar(t.pg)}</td><td>${sbadge(t.s)}</td><td>${pr}</td></tr>`;
-  });
-  document.getElementById('my-table').innerHTML=h+'</tbody>';
 }
 
 // WEEKLY
