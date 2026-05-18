@@ -193,7 +193,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         <div>
           <div class="sl2">Сүүлийн ажлуудын жагсаалт</div>
           <div class="card">
-            <div class="ch"><span class="ct2">Ажлын сан — сүүлийн 12</span><span class="cm">Нийт 124 ажил</span></div>
+            <div class="ch"><span class="ct2" id="dt-title">Ажлуудын жагсаалт</span><span class="cm" id="dt-count">—</span></div>
             <div class="tw"><table id="dt-table"></table></div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px">
@@ -809,13 +809,39 @@ function renderDashboard(){
     <div class="sc s-am"><div class="sl">Энэ 7 хоногт</div><div class="sv am">${urgWeek}</div><div class="ss">05.18–05.24 дуусах</div></div>
     <div class="sc s-tl"><div class="sl">Дууссан</div><div class="sv tl">${urgDone}</div><div class="ss">${urgDonePct}% нийт яаралтай</div></div>`;
 
-  // Task table - show last 12
-  const show=ft.slice(0,12);
-  let h='<thead><tr><th>#</th><th>Ажлын нэр</th><th>Хариуцагч</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
-  if(!show.length){h+='<tr><td colspan="6" class="nd">Ажил олдсонгүй</td></tr>';}
-  else show.forEach(t=>{
-    const dc=t.ov?'dt-o':'dt-n';
-    h+=`<tr><td class="ic">${t.id}</td><td><div class="tn">${t.n}</div><div class="tc">${t.c}</div></td><td style="font-size:11px;white-space:nowrap">${t.o.split(' ')[0]}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${t.due||'—'}</td><td>${pbar(t.pg)}</td><td>${sbadge(t.s)}</td></tr>`;
+  // Хоёр эхийн ажлуудыг нийлүүлж харуулах
+  const owner_filter = owner;
+
+  // Ажлын сан
+  const taskRows = ft.map(t=>({
+    src:'task', no:t.id, name:t.n, cat:t.c, owner:t.o,
+    due:t.due, pg:t.pg, stat:t.s, ov:t.ov
+  }));
+
+  // Яаралтай чиглэл
+  const urgRows = fu.map(u=>({
+    src:'urgent', no:u.no, name:u.n, cat:u.c, owner:u.o,
+    due:u.due, pg:u.pg, stat:u.pg>=100?'Дууссан':u.ov?'Хоцорсон':'Хэрэгжиж байгаа', ov:u.ov
+  }));
+
+  // Нийлүүлэх — яаралтай дээр, ажлын сан доор
+  const allRows = [...urgRows, ...taskRows];
+  const titleTxt = owner_filter
+    ? `${owner_filter.split(' ')[0]} — нийт ${allRows.length} ажил (📋${taskRows.length} + ⚠️${urgRows.length})`
+    : `Бүх ажил — нийт ${allRows.length} (📋${taskRows.length} + ⚠️${urgRows.length})`;
+
+  if(document.getElementById('dt-title')) document.getElementById('dt-title').textContent=titleTxt;
+  if(document.getElementById('dt-count')) document.getElementById('dt-count').textContent='';
+
+  let h='<thead><tr><th>Төрөл</th><th>#</th><th>Ажлын нэр</th><th>Хариуцагч</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
+  if(!allRows.length){h+='<tr><td colspan="7" class="nd">Ажил олдсонгүй</td></tr>';}
+  else allRows.forEach(r=>{
+    const dc=r.ov?'dt-o':'dt-n';
+    const srcBadge=r.src==='urgent'
+      ?'<span style="font-size:10px;font-weight:700;color:#b91c1c;background:#fee2e2;padding:2px 6px;border-radius:4px">⚠️ Яаралтай</span>'
+      :'<span style="font-size:10px;font-weight:700;color:#1d4ed8;background:#dbeafe;padding:2px 6px;border-radius:4px">📋 Ажлын сан</span>';
+    const statBadge=r.stat==='Дууссан'?'<span class="badge b-d">✓ Дууссан</span>':r.ov?'<span class="badge b-o">⚠ Хоцорсон</span>':r.stat==='Хэрэгжиж байгаа'?'<span class="badge b-a">→ Хэрэгжиж</span>':'<span class="badge b-n">Эхлээгүй</span>';
+    h+=`<tr><td>${srcBadge}</td><td class="ic">${r.no}</td><td><div class="tn">${r.name}</div><div class="tc">${r.cat}</div></td><td style="font-size:11px;white-space:nowrap">${r.owner.split(',')[0].trim().split(' ')[0]}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px" class="${dc}">${r.due||'—'}</td><td>${pbar(r.pg)}</td><td>${statBadge}</td></tr>`;
   });
   document.getElementById('dt-table').innerHTML=h+'</tbody>';
 
