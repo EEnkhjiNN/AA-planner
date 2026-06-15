@@ -942,17 +942,32 @@ function renderDashboard(){
   const maxCat=Math.max(...cats.map(c=>c.c),1);
   document.getElementById('dt-cats').innerHTML=cats.map(c=>`<div class="cr"><span class="crn">${c.n}</span><div class="crbar"><div class="crfill" style="width:${Math.round(c.c/maxCat*100)}%"></div></div><span class="crnum">${c.c}</span></div>`).join('');
 
-  // Advisors
-  document.getElementById('dt-advisors').innerHTML=ADV.filter(a=>!owner||a.n===owner).map(a=>`
+  // Advisors — Ажлын сан + Яаралтай чиглэл нийлүүлсэн
+  document.getElementById('dt-advisors').innerHTML=ADV.filter(a=>!owner||a.n===owner).map(a=>{
+    // Яаралтай чиглэлээс тухайн зөвлөхийн ажлуудыг олох (олон хариуцагчтай ч таних)
+    const mu = URGENT.filter(u=>u.o.split(',').map(s=>s.trim()).some(s=>s===a.n||s.includes(a.n.split(' ')[0])));
+    const uT = mu.length;
+    const uD = mu.filter(u=>u.pg>=100).length;
+    const uOv = mu.filter(u=>u.ov).length;
+
+    const totalT  = a.t + uT;
+    const totalD  = a.d + uD;
+    const totalOv = a.ov + uOv;
+    // Дундаж гүйцэтгэл — task pg-г ADV.avg-аас, urgent pg-г шууд авч жигнэсэн дундаж
+    const uAvg = uT ? Math.round(mu.reduce((s,u)=>s+u.pg,0)/uT) : 0;
+    const totalAvg = totalT ? Math.round((a.avg*a.t + uAvg*uT)/totalT) : 0;
+
+    return `
     <div class="ar">
       <div class="aa" style="background:${a.c}">${ini(a.n)}</div>
       <div style="flex:1;min-width:0">
         <div class="an">${a.n}</div>
-        <div class="ac">${a.t} ажил · ${a.d} дууссан · ${a.ov} хэтэрсэн · ${a.avg}% дундаж</div>
-        <div class="abar"><div class="afill" style="width:${a.avg||2}%;background:${a.c}"></div></div>
+        <div class="ac">${totalT} ажил (📋${a.t}+⚠️${uT}) · ${totalD} дууссан · ${totalOv} хэтэрсэн · ${totalAvg}% дундаж</div>
+        <div class="abar"><div class="afill" style="width:${totalAvg||2}%;background:${a.c}"></div></div>
       </div>
-      <div class="anum">${a.t}</div>
-    </div>`).join('');
+      <div class="anum">${totalT}</div>
+    </div>`;
+  }).join('');
 
   // Overdue
   const ovTasks=ft.filter(t=>t.ov);
