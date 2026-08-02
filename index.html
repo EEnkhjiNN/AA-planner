@@ -146,7 +146,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
   <nav style="padding:8px 0;flex:1">
     <div class="ns">Үндсэн</div>
     <div class="ni active" onclick="go('dashboard',this)"><span class="ni-ic">◼</span>Хяналтын самбар</div>
-    <div class="ni" onclick="go('tasks',this)"><span class="ni-ic">☰</span>Ажлын сан<span class="nbr nb-g">252</span></div>
+    <div class="ni" onclick="go('tasks',this)"><span class="ni-ic">☰</span>Ажлын сан<span class="nbr nb-g">273</span></div>
     <div class="ni" onclick="go('urgent',this)"><span class="ni-ic">⚡</span>Яаралтай чиглэл<span class="nbr nb-r">82</span></div>
     <div class="ns">Миний</div>
     <div class="ni" onclick="go('mywork',this)"><span class="ni-ic">👤</span>Миний ажил</div>
@@ -231,7 +231,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
     <!-- АЖЛЫН САН -->
     <div id="pg-tasks" class="page">
       <div class="sg">
-        <div class="sc s-bl"><div class="sl">Нийт</div><div class="sv bl">252</div></div>
+        <div class="sc s-bl"><div class="sl">Нийт</div><div class="sv bl">273</div></div>
         <div class="sc s-gn"><div class="sl">Дууссан</div><div class="sv gn">155</div></div>
         <div class="sc s-am"><div class="sl">Хэрэгжиж байгаа</div><div class="sv am">71</div></div>
         <div class="sc s-gy"><div class="sl">Эхлээгүй</div><div class="sv gy">24</div></div>
@@ -425,7 +425,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
               <p style="margin-bottom:7px">Энэ долоо хоногт <strong>14 ажил</strong> дуусах хуваарьтай.</p>
               <p style="margin-bottom:7px"><strong>Баасан (05.15)</strong>-нд 7 ажил дуусна — хамгийн их ачаалалтай өдөр.</p>
               <p style="margin-bottom:7px"><strong class="rd">20 ажил хугацаа хэтэрсэн</strong> — шуурхай анхаарал шаардлагатай.</p>
-              <p>Нийт ажлын тоо <strong>252</strong> болж нэмэгдлээ — 155 дууссан (62%). <strong>Batkhuu Otgon</strong> 5 ажил бүгд хэтэрсэн.</p>
+              <p>Нийт ажлын тоо <strong>273</strong> болж нэмэгдлээ — 155 дууссан (57%). <strong>Batkhuu Otgon</strong> 5 ажил бүгд хэтэрсэн.</p>
             </div>
           </div>
         </div>
@@ -758,10 +758,31 @@ const TASKS=[
   {id:246,n:"Эдийн засгийн бодлогын зөвлөлийн өргөтгөсөн хуралдаан зохион байгуулах",c:"ЗГХЭГ-тай холбоотой",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.07.06",due:"2026.07.06",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
   {id:247,n:"Бан Ги Мүн уулзалт",c:"Засгийн газар",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.07.03",due:"2026.07.03",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
   {id:248,n:"ОХУ-ын ГХ-ны дэд сайд Руденко",c:"Засгийн газар",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.07.06",due:"2026.07.06",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
-  {id:249,n:"Чайна Энержи уулзалт",c:"Засгийн газар",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.07.06",due:"2026.07.06",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
+  {id:249,n:"Чайна Энержи уулзалт",c:"Засгийн газар",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.07.28",due:"2026.07.06",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
   {id:250,n:"Франклин Тэмплтон уулзалт",c:"Засгийн газар",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.07.06",due:"2026.07.08",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
   {id:251,n:"БНСУ-ын Ерөнхийлөгч бараалхалт",c:"Засгийн газар",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.07.06",due:"2026.07.10",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
   {id:252,n:"Рио Тинто ТУЗ-ын дарга Дом Бар уулзалт",c:"Засгийн газар",o:"Chimguundari Navaan-Yunden",cl:"",em:"",st:"2026.06.29",due:"2026.06.29",s:"Дууссан",p:"",pg:100,note:"",ov:false,wk:false,dn:true},
+  {id:253,n:"ҮБС-ийн хөрөнгө оруулалтын асуудлаар Чингис хаан нэгдэлтэй уулзах, мэдээлэл цуглуулах",c:"Засгийн газар",o:"Munkhzul Lkhagvasuren",cl:"",em:"",st:"2026.07.28",due:"2026.07.31",s:"",p:"",pg:0,note:"",ov:false,wk:false,dn:false},
+  {id:254,n:"Архидалтын эсрэг үндэсний санаачилгыг хэрэгжүүлэх талаар холбогдох яамдтай уулзах, төслийн санаа боловсруулах",c:"Ажлын алба",o:"Munkhzul Lkhagvasuren",cl:"Nomin",em:"",st:"2026.07.28",due:"2026.08.07",s:"",p:"",pg:0,note:"",ov:false,wk:false,dn:false},
+  {id:255,n:"Mining to Mind Нэвтрүүлгийн 1-р улирлын бичлэг хийх",c:"Ажлын алба",o:"Erdenetuya Ganbold",cl:"",em:"",st:"2026.08.06",due:"2026.08.18",s:"Хэрэгжиж байгаа",p:"",pg:50,note:"",ov:false,wk:false,dn:false},
+  {id:256,n:"Mining week хөтөлбөр эцэслэх",c:"Ажлын алба",o:"Erdenetuya Ganbold",cl:"",em:"",st:"2026.08.02",due:"2026.09.16",s:"Хэрэгжиж байгаа",p:"",pg:50,note:"",ov:false,wk:false,dn:false},
+  {id:257,n:"Хөнгөн цагааны аж үйлдвэрийн паркийн ажилд оролцох",c:"Ажлын алба",o:"Erdenetuya Ganbold",cl:"",em:"",st:"2026.08.02",due:"2026.10.01",s:"Хэрэгжиж байгаа",p:"",pg:50,note:"",ov:false,wk:false,dn:false},
+  {id:258,n:"Үндэсний баялгийн сангийн хууль, ашигт малтмалын тухай хуулийн хэрэгжилтэд хяналт тавин ажиллах",c:"Ажлын алба",o:"Erdenetuya Ganbold",cl:"",em:"",st:"2026.10.01",due:"2026.12.31",s:"Хэрэгжиж байгаа",p:"",pg:50,note:"",ov:false,wk:false,dn:false},
+  {id:259,n:"ЕБС-ийн ачааллыг бууруулах, хотхоны бага сургууль, төрөлжсөн ахлах сургуулиудыг байгуулах",c:"Ажлын алба",o:"Ganbat Bulgaa",cl:"",em:"",st:"2026.08.01",due:"2026.11.01",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,note:"",ov:false,wk:false,dn:false},
+  {id:260,n:"Боловсролын зээлийн сангийн концепцыг шинэчлэх, Боловсролын хөгжлийн сан болгох",c:"Ажлын алба",o:"Ganbat Bulgaa",cl:"",em:"",st:"2026.08.01",due:"2026.09.30",s:"Эхлээгүй",p:"Дунд",pg:0,note:"",ov:false,wk:false,dn:false},
+  {id:261,n:"Мэргэжлийн болон техникийн боловсролын байгууллагуудад хувийн хэвшлийн оролцоог нэмэгдүүлэх хүрээнд хамтарсан ТУЗ байгуулж түншлэлийг эхлүүлэх",c:"Засгийн газар",o:"Ganbat Bulgaa",cl:"",em:"",st:"2026.08.01",due:"2026.10.15",s:"Эхлээгүй",p:"Дунд",pg:0,note:"",ov:false,wk:false,dn:false},
+  {id:262,n:"Хүүхдийн цэцэрлэг, ерөнхий боловсролын сургуулийн суралцагчдыг урьдчилсан сэргийлэх эрт илрүүлэг үзлэгт хамруулах",c:"Ажлын алба",o:"Ganbat Bulgaa",cl:"",em:"",st:"2026.07.22",due:"2026.08.31",s:"Хэрэгжиж байгаа",p:"Дунд",pg:50,note:"",ov:false,wk:false,dn:false},
+  {id:263,n:"Хиймэл оюуны Үндэсний зөвлөл байгуулах, хуралдааныг зохион байгуулах",c:"",o:"",cl:"",em:"",st:"",due:"",s:"",p:"",pg:0,note:"",ov:false,wk:false,dn:false},
+  {id:264,n:"Инфляц, махны үнэ: Стратегийн нөөцийн бараа, бүтээгдэхүүний биржийн цахим систем бий болгох ЗГ-ын тогтоол",c:"Засгийн газар",o:"Enkh-Amgalan Lkhagvabayar",cl:"",em:"",st:"2026.07.29",due:"2026.09.01",s:"Хэрэгжиж байгаа",p:"Өндөр",pg:50,note:"",ov:false,wk:false,dn:false},
+  {id:265,n:"Махны үнийн асуудал, нөөцийн мах бэлтгэл, махны биржийн асуудалд анхаарах, ХХААХҮЯам, НЗДТГ хамтрах",c:"Засгийн газар",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"2026.08.03",due:"",s:"",p:"",pg:0,note:"07.31-ны 09.30 цагт салбарын Сайд, Нийслэлийн удирдлагуудтай уулзахаар тохирсон боловч Сайд уулзалтыг түр хойшлуулсан.",ov:false,wk:false,dn:false},
+  {id:266,n:"Хүнсний ногооны хангамж анхаарах, ХХААХҮЯ",c:"Засгийн газар",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"2026.08.30",due:"",s:"",p:"",pg:0,note:"07.30 ны өдөр ХХААХҮЯ дээр ажиллаж ТНБДаргатай уулзаж мэдээлэл солилцсон.",ov:false,wk:false,dn:false},
+  {id:267,n:"Ургац хураалтанд анхаарах, ХХААХҮЯ",c:"Засгийн газар",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"2026.09.30",due:"",s:"",p:"",pg:0,note:"Ургац хураалтын үеэр Ерөнхий сайдыг Сэлэнгийн бүс нутагт ажиллуулах тал дээр бэлтгэл ажил хангуулахаар ажиллаж байна.",ov:false,wk:false,dn:false},
+  {id:268,n:"Өргөн хэрэглээний барааны үнийн өсөлтийн судалгаа, мэдээлэл бэлтгэх, ХХААХҮЯ",c:"Засгийн газар",o:"Dalkhaasuren Sugarjav",cl:"Enkh-Amgalan",em:"",st:"2026.08.03",due:"",s:"",p:"",pg:0,note:"",ov:false,wk:false,dn:false},
+  {id:269,n:"Өвөлжилтийн бэлтгэлд анхаарах, ХХААХҮЯ",c:"Засгийн газар",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"2026.10.01",due:"",s:"",p:"",pg:0,note:"08.03-ны даваа гарагийн 07 цагт аймаг нийслэлийн ХАА-н газрын дарга нартай цахим хурал хийнэ.",ov:false,wk:false,dn:false},
+  {id:270,n:"Эрүүл мал хөтөлбөрийн хэрэгжилтэнд анхаарах, ХХААХҮЯ",c:"Засгийн газар",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"",due:"",s:"",p:"",pg:0,note:"ХХААХҮЯ-аас мэдээлэл татаж байна.",ov:false,wk:false,dn:false},
+  {id:271,n:"КОП-17 ийн хүрээнд Нарлаг Монголын малчин хөтөлбөрийг уях",c:"Засгийн газар",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"2026.09.15",due:"",s:"",p:"",pg:0,note:"",ov:false,wk:false,dn:false},
+  {id:272,n:"2027 оны төсөвт заавал суулгах ажлуудыг эрэмбэлж анхаарах, ХХААХҮЯ",c:"",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"2026.11.15",due:"",s:"",p:"",pg:0,note:"ХХААХҮ-ийн яамны удирдлагуудтай санал солилцсон.",ov:false,wk:false,dn:false},
+  {id:273,n:"Ерөнхий сайдын өмнө нь иргэдтэй хийсэн уулзалтууд дээр хэлсэн үгнүүдэд анхаарах",c:"",o:"Dalkhaasuren Sugarjav",cl:"",em:"",st:"",due:"",s:"",p:"",pg:0,note:"",ov:false,wk:false,dn:false},
 ];
 const URGENT=[
   {no:"1",n:"Баянгол дүүргийн эмнэлэгт ажиллах",c:"Ажлын алба",o:"Dashdemberel Lkhagvasuren",st:"2026.04.13",due:"2026.04.13",pg:100,ov:false,wk:false},
@@ -849,16 +870,19 @@ const URGENT=[
 ];
 const ADV=[
   {n:"Bulganchimeg Bayasgalan",t:47,d:17,ip:20,pe:10,ov:13,avg:57,c:"#7c3aed"},
-  {n:"Erdenetuya Ganbold",t:57,d:37,ip:16,pe:0,ov:11,avg:77,c:"#dc2626"},
+  {n:"Erdenetuya Ganbold",t:61,d:37,ip:20,pe:0,ov:11,avg:75,c:"#dc2626"},
   {n:"Tengis Sukhee",t:25,d:15,ip:8,pe:1,ov:6,avg:62,c:"#2563eb"},
   {n:"Nomin Ganbaatar",t:35,d:25,ip:8,pe:2,ov:2,avg:83,c:"#16a34a"},
-  {n:"Ganbat Bulgaa",t:13,d:12,ip:1,pe:0,ov:1,avg:96,c:"#0d9488"},
+  {n:"Ganbat Bulgaa",t:17,d:12,ip:3,pe:2,ov:1,avg:79,c:"#0d9488"},
   {n:"Sukh-Ochir Batsukh",t:16,d:12,ip:3,pe:1,ov:4,avg:84,c:"#9333ea"},
   {n:"Chimguundari Navaan-Yunden",t:26,d:18,ip:8,pe:0,ov:1,avg:81,c:"#0891b2"},
   {n:"Batkhuu Otgon",t:11,d:9,ip:2,pe:0,ov:2,avg:91,c:"#b45309"},
-  {n:"Munkhzul Lkhagvasuren",t:9,d:9,ip:0,pe:0,ov:0,avg:89,c:"#e11d48"},
+  {n:"Munkhzul Lkhagvasuren",t:11,d:9,ip:0,pe:0,ov:0,avg:73,c:"#e11d48"},
   {n:"Surenkhorol Khash-Erdene",t:4,d:1,ip:2,pe:1,ov:3,avg:50,c:"#059669"},
-  {n:"Tamir Erdene-Ochir",t:0,d:0,ip:0,pe:0,ov:0,avg:0,c:"#64748b"}
+  {n:"Tamir Erdene-Ochir",t:0,d:0,ip:0,pe:0,ov:0,avg:0,c:"#64748b"},
+  {n:"Dalkhaasuren Sugarjav",t:9,d:0,ip:0,pe:0,ov:0,avg:0,c:"#0369a1"},
+  {n:"Enkh-Amgalan Lkhagvabayar",t:1,d:0,ip:1,pe:0,ov:0,avg:50,c:"#b45309"},
+  {n:"Bayar Amarbayasgalan",t:0,d:0,ip:0,pe:0,ov:0,avg:0,c:"#7e22ce"}
 ];
 
 // HELPERS
@@ -874,7 +898,7 @@ function pbar(pg){
 }
 function ini(n){return n.split(' ').map(w=>w[0]||'').slice(0,2).join('');}
 
-const OWNERS=["Batkhuu Otgon", "Bulganchimeg Bayasgalan", "Chimguundari Navaan-Yunden", "Erdenetuya Ganbold", "Ganbat Bulgaa", "Munkhzul Lkhagvasuren", "Nomin Ganbaatar", "Sukh-Ochir Batsukh", "Surenkhorol Khash-Erdene", "Tamir Erdene-Ochir", "Tengis Sukhee"];
+const OWNERS=["Batkhuu Otgon", "Bayar Amarbayasgalan", "Bulganchimeg Bayasgalan", "Chimguundari Navaan-Yunden", "Dalkhaasuren Sugarjav", "Enkh-Amgalan Lkhagvabayar", "Erdenetuya Ganbold", "Ganbat Bulgaa", "Munkhzul Lkhagvasuren", "Nomin Ganbaatar", "Sukh-Ochir Batsukh", "Surenkhorol Khash-Erdene", "Tamir Erdene-Ochir", "Tengis Sukhee"];
 const CATS=['Ажлын алба','Засгийн газар','ЗГХЭГ-тай холбоотой','УИХ','Ажлын хэсэг','МАН','Хурал','Уулзалт','Цаг авах'];
 // NAVIGATION
 const TITLES={dashboard:'Хяналтын самбар',tasks:'Ажлын сан',urgent:'Яаралтай чиглэл',mywork:'Миний ажил',weekly:'7 хоногийн тайлан',meetings:'Хурал & Уулзалт',settings:'Тохиргоо'};
