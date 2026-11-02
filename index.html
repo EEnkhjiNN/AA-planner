@@ -1,6 +1,3 @@
-
-
-Index · HTML
 <!DOCTYPE html>
 <html lang="mn">
 <head>
@@ -147,7 +144,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
 </style>
 </head>
 <body>
- 
+
 <aside class="sb">
   <div class="sb-logo">
     <div class="lt2">AA Planner</div>
@@ -166,7 +163,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
     <div class="ni" onclick="go('settings',this)"><span class="ni-ic">⚙</span>Тохиргоо</div>
   </nav>
 </aside>
- 
+
 <div class="main">
   <div class="topbar">
     <div class="tb-t" id="ptitle">Хяналтын самбар</div>
@@ -175,9 +172,9 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
       
     </div>
   </div>
- 
+
   <div class="ct">
- 
+
     <!-- DASHBOARD -->
     <div id="pg-dashboard" class="page active">
       <!-- Dashboard Filter Bar -->
@@ -192,7 +189,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         </select>
         <select class="fs" id="dash-cat" onchange="renderDashboard()"><option value="">Бүх ангилал</option></select>
       </div>
- 
+
       <!-- Ажлын сан -->
       <div class="sl2">Ажлын сан</div>
       <div class="sg" id="dash-task-stats"></div>
@@ -254,7 +251,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
           </div>
         </div>
       </div>
- 
+
       <!-- ДООД 3 ТЭНЦҮҮ КАРТ -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px;align-items:start">
         <div class="card bottom-sync-card">
@@ -294,7 +291,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
           <div style="padding:10px 20px;border-top:1px solid var(--bd);font-size:12px;color:var(--gy);text-align:center;flex-shrink:0">Гадна дарж хаана</div>
         </div>
       </div>
- 
+
       <!-- OVERDUE MODAL -->
       <div id="ov-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:20px">
         <div style="background:#fff;border-radius:14px;width:100%;max-width:600px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.25);overflow:hidden">
@@ -318,7 +315,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
       </div>
     </div>
     </div>
- 
+
     <!-- АЖЛЫН САН -->
     <div id="pg-tasks" class="page">
       <div class="sg">
@@ -342,7 +339,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         <div class="tw"><table id="t-table"></table></div>
       </div>
     </div>
- 
+
     <!-- ЯАРАЛТАЙ ЧИГЛЭЛ -->
     <div id="pg-urgent" class="page">
       <div class="sg">
@@ -369,7 +366,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         <div class="tw"><table id="u-table"></table></div>
       </div>
     </div>
- 
+
     <!-- МИНИЙ АЖИЛ -->
     <div id="pg-mywork" class="page">
       <div class="card" style="margin-bottom:16px">
@@ -397,7 +394,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         <div class="tw"><table id="my-table"></table></div>
       </div>
     </div>
- 
+
     <!-- 7 ХОНОГИЙН ТАЙЛАН -->
     <div id="pg-weekly" class="page">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
@@ -522,7 +519,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         </div>
       </div>
     </div>
- 
+
     <!-- ХУРАЛ -->
     <div id="pg-meetings" class="page">
       <div class="sg">
@@ -558,7 +555,7 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         </div>
       </div>
     </div>
- 
+
     <!-- ТОХИРГОО -->
     <div id="pg-settings" class="page">
       <div class="card">
@@ -594,15 +591,15 @@ select.fs{padding:5px 9px;border:1px solid var(--bd);border-radius:7px;font-size
         </div>
       </div>
     </div>
- 
+
   </div>
 </div>
- 
+
 <script>
 // ═══ БОДИТ ӨГӨГДӨЛ — 2026.04.27-ийн байдлаар ═══
- 
- 
- 
+
+
+
 const OWNERS=['Batkhuu Otgon','Bayar Amarbayasgalan','Bulganchimeg Bayasgalan','Chimguundari Navaan-Yunden','Dalkhaasuren Sugarjav','Dashdemberel Lkhagvasuren','Enkh-Amgalan Lkhagvabayar','Erdenetuya Ganbold','Ganbat Bulgaa','Munkhzul Lkhagvasuren','Nomin Ganbaatar','Sukh-Ochir Batsukh','Surenkhorol Khash-Erdene','Tamir Erdene-Ochir','Tengis Sukhee','Tsolmon Dorjderem'];
 const CATS=['АА','ЗГ','ЗГХЭГ','УИХ','АХ'];
 // NAVIGATION
@@ -614,7 +611,7 @@ function go(id,el){
   if(el) el.classList.add('active');
   document.getElementById('ptitle').textContent=TITLES[id]||'';
 }
- 
+
 // DASHBOARD
 function pbar(pg){
   const v=Math.min(100,Math.max(0,parseInt(pg)||0));
@@ -643,7 +640,7 @@ function initDashFilters(){
   const catLabel={'АА':'Ажлын алба','ЗГ':'Засгийн газар','ЗГХЭГ':'ЗГХЭГ-тай холбоотой','УИХ':'УИХ','АХ':'Ажлын хэсэг'};
   CATS.forEach(c=>{const op=document.createElement('option');op.value=c;op.textContent=catLabel[c]||c;cs.appendChild(op);});
 }
- 
+
 const TASKS=[
   {id:'1.0',n:'МАН-ын бүлгийн хурал болон шуурхай хуралд суух',c:'АА',o:'Dashdemberel Lkhagvasuren',d:'',s:'Эхлээгүй',pr:'Дунд',nt:'',ov:false,pct:0},
   {id:'2.0',n:'Зөвшөөрлийн тухай хуулийн нэмэлт, өөрчлөлтийн хуулийн төслийн хэлэлцүүлэг',c:'УИХ',o:'Tengis Sukhee',d:'2026.06.30',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
@@ -706,9 +703,9 @@ const TASKS=[
   {id:'59.0',n:'Геополитикийн нөхцөл байдал хурцдаж, мөргөлдөөн, сөргөлдөөний голомт олширч, улс гүрэн хоорондын талцал гүнзгийрч байгааг харгалзан гадаад бодлогын үйл ажиллагааны механизм, арга барилыг боловсронгуй болгох бодлого боловсруулахад оролцоно.',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:false,pct:0},
   {id:'60.0',n:'“Үндэсний сөрөн тэсвэрлэх стратеги” боловсруулж батлуулахад дэмжлэг үзүүлнэ.',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
   {id:'61.0',n:'БНСУ, Евро-Азийн эдийн засгийн холбоо, Бүгд Найрамдах Хятад Ард Улстай эдийн засгийн түншлэл, чөлөөт худалдааны хэлэлцээрийг байгуулж, худалдааны түнш улс орнуудтай хамтран ажиллах эдийн засгийн чиглэлийг нарийвчлан тодорхойлж, хөрөнгө оруулалт, экспорт, бизнесийг дэмжсэн харилцааг хөгжүүлнэ.',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
-  {id:'62.0',n:'ШХАБ-ын Засгийн газрын тэргүүн нарын уулзалт, ДЭЗЧУ-д Ерөнхий сайдыг оролцуулна.',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'62.0',n:'ШХАБ-ын Засгийн газрын тэргүүн нарын уулзалт, ДЭЗЧУ-д Ерөнхий сайдыг оролцуулна.',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Дууссан',pr:'m',nt:'Тэргүүн Шадар сайдыг оролцуулахаар бэлтгэж байна.',ov:false,pct:100},
   {id:'63.0',n:'“Цөлжилттэй тэмцэх тухай НҮБ-ын Конвенцын Талуудын 17 дугаар бага хурлын (COP-17) дээд түвшний уулзалтын бэлтгэлийг хангахад удирдлага, бодлогын дэмжлэг үзүүлнэ.',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
-  {id:'64.0',n:'Хилийн чанадад байгаа Монгол Улсын иргэн, аж ахуйн нэгжийн хууль ёсны эрх ашгийг тууштай хамгаалж, эрх зүйн туслалцаа үзүүлэх үйлчилгээний чанар, хүртээмжийг сайжруулна.',c:'ЗГХЭГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'64.0',n:'Хилийн чанадад байгаа Монгол Улсын иргэн, аж ахуйн нэгжийн хууль ёсны эрх ашгийг тууштай хамгаалж, эрх зүйн туслалцаа үзүүлэх үйлчилгээний чанар, хүртээмжийг сайжруулна.',c:'ЗГХЭГ',o:'Chimguundari Navaan-Yunden',d:'',s:'Дууссан',pr:'m',nt:'ЕС-ын Японд хийсэн айлчлалын үеэр иргэдтэй уулзалт зохион байгуулж, хүсэлтүүдэд нь хариулт өгөхөөр ажиллаж байна. Хилийн чанад дахь Монголчуудын зөвлөлийн хуралд ЕС-ын илгээлтийг уншсан.',ov:false,pct:100},
   {id:'65.0',n:'ЭМ-ийн салбарын ажилтнуудын цалин хөлсний асуудал, ЭМ-ийн салбарт хэрэгжүүлэх арга хэмжээний төлөвлөгөөг ЗГ-аар батлуулах (ГБХНХЯ, ЭМЯ)',c:'ЗГ',o:'Ganbat Bulgaa',d:'2026.04.15',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'66.0',n:'Шинжлэх ухааны болон боловсролын салбарын багш ажилтнуудын цалингийн асуудлыг ЗГ-аар батлуулах (ГБХНХЯ, СЯ, БЯ)',c:'ЗГ',o:'Ganbat Bulgaa',d:'2026.04.22',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'67.0',n:'СӨБ, ЕБС, МБСБ-ын нэг суралцагчид оногдох хувьсах зардлыг шинэчлэх асуудлыг ЗГ-ын хуралд хэлэлцүүлж батлуулах (СЯ, БЯ)',c:'ЗГ',o:'Ganbat Bulgaa',d:'2026.04.22',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
@@ -733,7 +730,7 @@ const TASKS=[
   {id:'86.0',n:'Эрх шилжүүлсний татвар тооцох аргачлалыг өөрчлөх албан даалгавар гаргах',c:'ЗГ',o:'Erdenetuya Ganbold',d:'2026.06.01',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'87.0',n:'Өрхийн эрүүл мэндийн төвүүдийг тайлан, илүү маягтаас чөлөөлөх ',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.06.30',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'88.0',n:'Чөлөөлье Эрүүл мэндийн хэлэлцүүлэг зохион байгуулах',c:'АА',o:'Nomin Ganbaatar',d:'2026.05.08',s:'Дууссан',pr:'Бага',nt:'',ov:false,pct:100},
-  {id:'89.0',n:'Ерөнхий сайдын ахладаг Нийгмийн эрүүл мэндийн үндэсний зөвлөлийг хуралдуулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.30',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:false,pct:0},
+  {id:'89.0',n:'Ерөнхий сайдын ахладаг Нийгмийн эрүүл мэндийн үндэсний зөвлөлийг хуралдуулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.12.21',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:false,pct:0},
   {id:'90.0',n:'Улсын эмнэлэг бүр тусдаа тендер зарлаж, ижил эмийг өөр өөр үнээр авдаг тогтолцооны өөрчлөлтийн ажлууд',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.09.30',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'91.0',n:'Хөнгөлөлтэй эмийн жагсаалт',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.09.30',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'92.0',n:'Улсын эмнэлэг бүрийг төлөөлөн удирдах зөвлөлтэй болгох',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.12.30',s:'Хэрэгжиж байгаа',pr:'Дунд',nt:'',ov:false,pct:0},
@@ -903,13 +900,13 @@ const TASKS=[
   {id:'256.0',n:'Mining week хөтөлбөр эцэслэх ',c:'АА',o:'Erdenetuya Ganbold',d:'2026.09.16',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'257.0',n:'Хөнгөн цагааны аж үйлдвэрийн паркийн ажилд оролцох ',c:'АА',o:'Erdenetuya Ganbold',d:'2026.10.01',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:true,pct:0},
   {id:'258.0',n:'Үндэсний баялгийн сангийн хууль, ашигт малтмалын тухай хуулийн хэрэгжилтэд хяналт тавин ажиллах ',c:'АА',o:'Erdenetuya Ganbold',d:'2026.12.31',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
-  {id:'259.0',n:'ЕБС-ийн ачааллыг бууруулах, хотхоны бага сургууль, төрөлжсөн ахлах сургуулиудыг байгуулах',c:'АА',o:'Ganbat Bulgaa',d:'2026.11.01',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:false,pct:0},
+  {id:'259.0',n:'ЕБС-ийн ачааллыг бууруулах, хотхоны бага сургууль, төрөлжсөн ахлах сургуулиудыг байгуулах',c:'АА',o:'Ganbat Bulgaa',d:'2026.11.01',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:true,pct:0},
   {id:'260.0',n:'Боловсролын зээлийн сангийн концепцыг шинэчлэх, Боловсролын хөгжлийн сан болгох',c:'АА',o:'Ganbat Bulgaa',d:'2026.09.30',s:'Хэрэгжиж байгаа',pr:'Дунд',nt:'',ov:true,pct:0},
-  {id:'261.0',n:'Мэргэжлийн болон техникийн боловсролын байгууллагуудад хувийн хэвшлийн оролцоог нэмэгдүүлэх хүрээнд хамтарсан ТУЗ байгуулж түншлэлийг эхлүүлэх',c:'ЗГ',o:'Ganbat Bulgaa',d:'2026.10.15',s:'Хэрэгжиж байгаа',pr:'Дунд',nt:'',ov:false,pct:0},
+  {id:'261.0',n:'Мэргэжлийн болон техникийн боловсролын байгууллагуудад хувийн хэвшлийн оролцоог нэмэгдүүлэх хүрээнд хамтарсан ТУЗ байгуулж түншлэлийг эхлүүлэх',c:'ЗГ',o:'Ganbat Bulgaa',d:'2026.10.15',s:'Хэрэгжиж байгаа',pr:'Дунд',nt:'',ov:true,pct:0},
   {id:'262.0',n:'Хүүхдийн цэцэрлэг, ерөнхий боловсролын сургуулийн суралцагчдыг урьдчилсан сэргийлэх эрт илрүүлэг үзлэгт хамруулах',c:'АА',o:'Ganbat Bulgaa',d:'2026.12.31',s:'Хэрэгжиж байгаа',pr:'Дунд',nt:'',ov:false,pct:0},
   {id:'263.0',n:'Хиймэл оюуны Үндэсний зөвлөл байгуулах, хуралдааныг зохион байгуулах',c:'ЗГ',o:'Ganbat Bulgaa',d:'2026.09.30',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'264.0',n:'Инфляц, махны үнэ: Стратегийн нөөцийн бараа, бүтээгдэхүүний биржийн цахим систем бий болгох ЗГ-ын тогтоол ',c:'ЗГ',o:'Enkh-Amgalan Lkhagvabayar',d:'2026.09.01',s:'Дууссан',pr:'Өндөр',nt:'ЗГ-ын тогтоол батлагдсан. Нийслэлийн удирдлагууд болон ХХААХҮЯ-ны удирдлагууд ЕС-тай уулзаж, чиглэл авсан. 2 долоо хоног тутамд тогтоолын хэрэгжилтийг ЗГ-ын хуралдаанд хэлэлцүүлж эхэлсэн. ',ov:false,pct:100},
-  {id:'265.0',n:'Махны үнийн асуудал, нөөцийн мах бэлтгэл, махны биржийн асуудалд анхаарах, ',c:'ЗГ',o:'Dalkhaasuren Sugarjav',d:'2026.11.01',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:false,pct:0},
+  {id:'265.0',n:'Махны үнийн асуудал, нөөцийн мах бэлтгэл, махны биржийн асуудалд анхаарах, ',c:'ЗГ',o:'Dalkhaasuren Sugarjav',d:'2026.11.01',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:true,pct:0},
   {id:'266.0',n:'Хүнсний ногооны хангамж анхаарах, ',c:'ЗГ',o:'Dalkhaasuren Sugarjav',d:'2016.11.01',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'07.30 ны өдөр ХХААХҮЯ дээр ажиллаж ТНБДаргатай уулзаж мэдээлэл солилцсон. ',ov:true,pct:0},
   {id:'267.0',n:'Ургац хураалтанд анхаарах, Ерөнхий сайдыг тариалангийн бүс нутгаар ажиллах бэлтгэл ажил хангах',c:'ЗГ',o:'Dalkhaasuren Sugarjav',d:'2026.10.01',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'268.0',n:'Засгийн газрын 2026 оны 122-р тогтоолын хэрэгжилтэнд хяналт тавих ',c:'ЗГ',o:'Dalkhaasuren Sugarjav',d:'2026.12.01',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:false,pct:0},
@@ -922,21 +919,21 @@ const TASKS=[
   {id:'275.0',n:'Эмнэлэгийн ТУЗ байгуулах хараат бус болгох ажлыг дуусгах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.12.30',s:'Хэрэгжиж байгаа',pr:'Бага',nt:'',ov:false,pct:0},
   {id:'276.0',n:'Түргэн тусламжийн үндэсний төв байгуулах, тус төв дээр ЕС-тай газар дээр нь танилцах',c:'АА',o:'Nomin Ganbaatar',d:'2026.10.23',s:'Дууссан',pr:'Бага',nt:'',ov:false,pct:100},
   {id:'277.0',n:'ЭМЯ, БЯ хамтарсан Сургууль, цэцэрлэгт суурилсан эрт илрүүлэг зохион байгуулах ажлын явцыг эрчимжүүлэх хурал ',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.08.07',s:'Дууссан',pr:'Бага',nt:'',ov:false,pct:100},
-  {id:'278.0',n:'ЕБС-ийн цэцэрлэгийн эрт илрүүлгийн үзлэгийг эхлүүлэх',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.12.25',s:'Эхлээгүй',pr:'Өндөр',nt:'',ov:false,pct:0},
-  {id:'279.0',n:'ЕБС-ийн эрт илрүүлгийн нээлтэд ЕС-ийг оролцуулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.09',s:'Эхлээгүй',pr:'Бага',nt:'',ov:true,pct:0},
+  {id:'278.0',n:'ЕБС-ийн цэцэрлэгийн эрт илрүүлгийн үзлэгийг эхлүүлэх',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.12.25',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
+  {id:'279.0',n:'ЕБС-ийн эрт илрүүлгийн нээлтэд ЕС-ийг оролцуулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.09',s:'Дууссан',pr:'Бага',nt:'',ov:false,pct:100},
   {id:'280.0',n:'Монгол Улсын Ерөнхий сайдын ивээл дор Монголын хүүхдийн зөвлөлийн бэлтгэл ажил хангах\n',c:'АА',o:'Nomin Ganbaatar',d:'2026.08.14',s:'Дууссан',pr:'Бага',nt:'',ov:false,pct:100},
   {id:'281.0',n:'Нэг эх үүсгэвэрийн эмийг худалдан авах Засгийн газрын тогтоолын төсөл',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.08.05',s:'Дууссан',pr:'Бага',nt:'ЭМЯ-д үүрэг чиглэл өгч 3 өдөр засгаар оруулах бэлтгэл хангаж байна',ov:false,pct:100},
   {id:'282.0',n:'"Нэг эх үүсвэрээс эм, эмнэлгийн хэрэглэгдэхүүн, биобэлдмэл, вакцин худалдан авахад баримтлах журам"-ыг шинэчлэн засгаар батлуулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.08.21',s:'Дууссан',pr:'Бага',nt:'',ov:false,pct:100},
   {id:'283.0',n:'Хүүхдийн ордон 2 ажлын явцыг эрчимжүүлэх',c:'ЗГХЭГ',o:'Nomin Ganbaatar',d:'2026.09.01',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'284.0',n:'Хүүхдийн төлөө ээлжит хурлыг хуралдуулах, төлөвлөгөө батлах',c:'ЗГХЭГ',o:'Nomin Ganbaatar',d:'2026.09.18',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
-  {id:'285.0',n:'Хүчирхийллийн эсрэг үндэсний хороог хуралдуулах',c:'ЗГХЭГ',o:'Nomin Ganbaatar',d:'2026.10.30',s:'Эхлээгүй',pr:'Дунд',nt:'',ov:false,pct:0},
+  {id:'285.0',n:'Хүчирхийллийн эсрэг үндэсний хороог хуралдуулах',c:'ЗГХЭГ',o:'Nomin Ganbaatar',d:'2026.10.30',s:'Дууссан',pr:'Дунд',nt:'Ажлын албаны хурал дээр чиг үүрэг шилжүүлэн ажиллахаар тохирсон тул хаав.',ov:false,pct:100},
   {id:'286.0',n:'Архидан согтуурахтай тэмцэх үндэсний хөдөлгөөн зохион байгуулах АХ байгуулах, хуралдуулах',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.08.21',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'287.0',n:'ЭМЯ, НЭМГ-тай хамтран ханиад, томууны үед өвөлжилтийн бэлтгэл байдал хангах чиглэлд төлөвлөгөө боловсруулан бэлтгэл байдал хангаж ажиллах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.08.21',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'288.0',n:'За бол заавал хий үндэсний хөдөлгөөний хэрэгжилтийг эрчимжүүлэх',c:'АА',o:'Nomin Ganbaatar',d:'2026.09.01',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'289.0',n:'ЭМЯ-ны төсвийн хэлэлцүүлэгт оролцох',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.08.03',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'290.0',n:'Архидан согтуурахтай тэмцэх үндэсний төлөвлөгөө боловсруулах ажлын хэсэгт ажиллах, ЗГ-ын тогтоолын төсөл боловсруулахад дэмжлэг үзүүлэх',c:'ЗГ',o:'Munkhzul Lkhagvasuren',d:'2026.08.21',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'291.0',n:'ҮБС-ийн хөрөнгө оруулалтын асуудлаар Чингис хаан нэгдэлтэй уулзах, мэдээлэл цуглуулах',c:'ЗГХЭГ',o:'Munkhzul Lkhagvasuren',d:'2026.08.06',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
-  {id:'292.0',n:'ҮБС-ийн хуульд нэмэлт, өөрчлөлт оруулах хуулийн төсөлд санал өгөх',c:'ЗГХЭГ',o:'Munkhzul Lkhagvasuren',d:'2026.08.13',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'',ov:true,pct:0},
+  {id:'292.0',n:'ҮБС-ийн хуульд нэмэлт, өөрчлөлт оруулах хуулийн төсөлд санал өгөх',c:'ЗГХЭГ',o:'Munkhzul Lkhagvasuren',d:'2026.08.13',s:'Дууссан',pr:'Өндөр',nt:'',ov:false,pct:100},
   {id:'293.0',n:'НД-ын багц хуулийн батлагдсантай холбоотой 2027 онд шаардагдах зардлыг улсын төсөвт суулгуулах асуудлаар холбогдох байгууллагуудтай хамтран ажиллах, ЕС-ыг мэдээллээр тухай бүр хангах',c:'ЗГ',o:'Munkhzul Lkhagvasuren',d:'2026.08.31',s:'Дууссан',pr:'Дунд',nt:'',ov:false,pct:100},
   {id:'294.0',n:'Хотын хөгжлийн бодлого төлөвлөлт: Нийслэл Улаанбаатар хотын урт ба дунд хугацааны хөгжлийн бодлого, төлөвлөгөөг боловсруулан танилцуулах',c:'ЗГ',o:'Bayar Amarbayasgalan',d:'',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
   {id:'295.0',n:'Хүнсний хангамж, нийслэлийн махны нөөц ба үнийн зохицуулалт: Махны үнийн өсөлттэй холбогдуулан нийслэлийн махны  нөөц бүрдүүлэлт болон Махны биржийн үйл ажиллагаанд хийсэн хяналт-шинжилгээ, үнэлгээний дүнг танилцуулж, цаашид хэрэгжүүлэх арга хэмжээний санал боловсруулах ',c:'ЗГ',o:'Bayar Amarbayasgalan',d:'',s:'Хэрэгжиж байгаа',pr:'m',nt:'2026 оны 07 дугаар сарын 31-ны өдөр болон 08 дугаар сарын 01-ны өдрүүдэд холбогдох албан хаагчидтай уулзаж мэдээлэл авч ажилласан. ',ov:false,pct:0},
@@ -950,7 +947,7 @@ const TASKS=[
   {id:'303.0',n:'Эрчим хүчний ТӨК-ийн засаглалыг сайжруулах',c:'ЗГ',o:'Bulganchimeg Bayasgalan',d:'2026.09.04',s:'Эхлээгүй',pr:'m',nt:'',ov:true,pct:0},
   {id:'304.0',n:'Чөлөөлье санаачлагын хэрэгжилтийг хянах',c:'ЗГХЭГ',o:'Bulganchimeg Bayasgalan',d:'2026.10.09',s:'Эхлээгүй',pr:'m',nt:'',ov:true,pct:0},
   {id:'305.0',n:'Эрчим хүчний их засварын явцыг шалгах',c:'ЗГ',o:'Bulganchimeg Bayasgalan',d:'2026.09.04',s:'Эхлээгүй',pr:'m',nt:'',ov:true,pct:0},
-  {id:'306.0',n:'Уур амьсгалын өөрчлөлтийн тухай хуулийн хэрэгжилтийг хангах',c:'ЗГ',o:'Bulganchimeg Bayasgalan',d:'2026.10.30',s:'Эхлээгүй',pr:'m',nt:'',ov:false,pct:0},
+  {id:'306.0',n:'Уур амьсгалын өөрчлөлтийн тухай хуулийн хэрэгжилтийг хангах',c:'ЗГ',o:'Bulganchimeg Bayasgalan',d:'2026.10.30',s:'Эхлээгүй',pr:'m',nt:'',ov:true,pct:0},
   {id:'307.0',n:'Google Chromebook үйлдвэр байгуулах санхүүжилтийн асуудлыг шийдвэрлэх',c:'ЗГ',o:'Ganbat Bulgaa',d:'2026.09.30',s:'Хэрэгжиж байгаа',pr:'Өндөр',nt:'Хөгжлийн банк, СЯ',ov:true,pct:0},
   {id:'308.0',n:'Солонгос улсад ажиллаж Монгол сургууль байгуулах, иргэдтэй уулзах',c:'АА',o:'Batkhuu Otgon',d:'2026.08.31',s:'Эхлээгүй',pr:'m',nt:'',ov:true,pct:0},
   {id:'309.0',n:'Орон сууцны залиланд өртсөн иргэдийн асуудлаар ажлын хэсэгт орж ажиллах',c:'АА',o:'Batkhuu Otgon',d:'2026.08.31',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:true,pct:0},
@@ -1036,7 +1033,7 @@ const TASKS=[
   {id:'389.0',n:'Ерөнхий сайдын Өвөрхангай аймагт ажиллах ажлууд болон Монгол Ардын Намын удирдах ажилтны бүсийн зөвлөгөөнд оролцох ажлын бэлтгэлийг хангасан, тус арга хэмжээнд оролцсон',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.09.20',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'390.0',n:'Хангайн бүсийн ЖДҮ эмэгтэйчүүдийг хуралд илтгэл тавих',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.09.20',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'391.0',n:'МАН-ын ахмадуудад зориулсан хуралд ЕС-ын тавих илтгэл, мэдээллийг бэлтгэх',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.09.22',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
-  {id:'392.0',n:'НҮБ-ын Хүн амын сангийн бүсийн экперттэй хамтран ажиллаж хэтийн тооцоолол хийх дата мэдээлэл, бодлогын зөвлөмжөөр хангах',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.10.12',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'392.0',n:'НҮБ-ын Хүн амын сангийн бүсийн экперттэй хамтран ажиллаж хэтийн тооцоолол хийх дата мэдээлэл, бодлогын зөвлөмжөөр хангах',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.10.12',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:true,pct:0},
   {id:'393.0',n:'МҮЭ-үүдийн идэвхтэн, сонгуультан 1000 төлөөлөгчийн хуралд ЕС-ыг оролцуулах, холбогдох арга хэмжээг авах',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.09.14',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'394.0',n:'Ерөнхий сайдын Япон улсад хийх айлчлалын бэлтгэл ажлыг хангах, бүрэлдэхүүнд оролцож ажиллах',c:'ЗГ',o:'Tamir Erdene-Ochir',d:'',s:'Эхлээгүй',pr:'m',nt:'',ov:false,pct:0},
   {id:'395.0',n:'Ерөнхий сайдыг Владивосток хотноо болох Дорнын ЭЗЧУ-д оролцуулах бэлтгэл хангаж, зохион байгуулах',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'2026.09.02',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
@@ -1045,13 +1042,33 @@ const TASKS=[
   {id:'398.0',n:'Ерөнхий сайдад АХБ-ны Ерөнхийлөгч М.Кандаг бараалхуулна',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'2026.10.05',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'399.0',n:'Ерөнхий сайдад ФИФА-гийн Ерөнхийлөгч Ж.Инфантиног бараалхуулах',c:'ЗГ',o:'Chimguundari Navaan-Yunden',d:'2026.10.05',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'400.0',n:'Хүүхдийн төлөө үндэсний зөвлөлийн “Хүүхдийн орчны аюулгүй байдал, урьдчилан сэргийлэх дэд  зөвлөл хуралдуулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.06',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
-  {id:'401.0',n:'Цэцэрлэг, ЕБС-д суурилсан эрт илрүүлгийн тухай мэдээ мэдээлэл олон нийтэд сурталчилан таниулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.16',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'401.0',n:'Цэцэрлэг, ЕБС-д суурилсан эрт илрүүлгийн тухай мэдээ мэдээлэл олон нийтэд сурталчилан таниулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.16',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'402.0',n:'Цэцэрлэг, ЕБС-д суурилсан эрт илрүүлгийн Dashboard ашиглалтад оруулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.05',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'403.0',n:'Хүүхдийн төлөө үндэсний зөвлөлийн “Хүүхдийн орчны аюулгүй байдал, урьдчилан сэргийлэх дэд  зөвлөл хуралдуулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.10.09',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
-  {id:'404.0',n:'НҮБ-ын Хүн амын сантай хамтран Хүн ам зүйн тэсвэртэй байдлын үнэлгээний эхний тайланг танилцуулах уулзалт зохион байгуулах',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.10.14',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'404.0',n:'НҮБ-ын Хүн амын сантай хамтран Хүн ам зүйн тэсвэртэй байдлын үнэлгээний эхний тайланг танилцуулах уулзалт зохион байгуулах',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.10.14',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
   {id:'405.0',n:'Ерөнхий сайдын Орхон аймагт ажиллах ажлууд болон Монгол Ардын Намын удирдах ажилтны бүсийн зөвлөгөөнд оролцох ажлын бэлтгэлийг хангасан, тус арга хэмжээнд оролцсон',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.10.09',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
-  {id:'406.0',n:'Ерөнхий сайдын Ховд аймагт ажиллах ажлууд болон Монгол Ардын Намын удирдах ажилтны бүсийн зөвлөгөөнд оролцох ажлын бэлтгэлийг хангасан, тус арга хэмжээнд оролцсон',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.10.16',s:'Эхлээгүй',pr:'m',nt:'',ov:false,pct:0},
-  {id:'407.0',n:'Анагаах Ухааны Эрдэм шинжилгээний хурал New Normal зохион байгуулах',c:'АА',o:'Nomin Ganbaatar',d:'2026.10.16',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0}
+  {id:'406.0',n:'Ерөнхий сайдын Ховд аймагт ажиллах ажлууд болон Монгол Ардын Намын удирдах ажилтны бүсийн зөвлөгөөнд оролцох ажлын бэлтгэлийг хангасан, тус арга хэмжээнд оролцсон',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.10.16',s:'Эхлээгүй',pr:'m',nt:'',ov:true,pct:0},
+  {id:'407.0',n:'Анагаах Ухааны Эрдэм шинжилгээний хурал New Normal зохион байгуулах',c:'АА',o:'Nomin Ganbaatar',d:'2026.10.16',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'408.0',n:'Шинэ цагийн малчин үндэсний аяны бэлтгэл ажилд оролцох  ',c:'АА',o:'Dalkhaasuren Sugarjav',d:'2026.12.31',s:'Эхлээгүй',pr:'m',nt:'',ov:false,pct:0},
+  {id:'409.0',n:'Ерөнхий сайдын орон нутаг дахь уулзалтуудын хөтөлбөр гаргах ',c:'ЗГХЭГ',o:'Dalkhaasuren Sugarjav',d:'2026.12.31',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'410.0',n:'Нөөцийн мах бэлтгэлийн үйл явцад хяналт тавих',c:'ЗГ',o:'Dalkhaasuren Sugarjav',d:'2026.11.30',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'411.0',n:'Ерөнхий сайдын Ховд аймагт ажиллах ажлууд болон Монгол Ардын Намын удирдах ажилтны бүсийн зөвлөгөөнд оролцох ажлын бэлтгэлийг хангасан, тус арга хэмжээнд оролцсон',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.10.16',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'412.0',n:'Ерөнхий сайдын Сүхбаатар дүүргийн иргэдтэй хийх уулзалтын бэлтгэлийг хангасан, тус арга хэмжээнд оролцсон',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.10.24',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'413.0',n:'Ерөнхий сайдын УИХ-ын чуулганд хийх мэтгэлцээний мэдээллийг нэгтгэж бэлдэх',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.10.30',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'414.0',n:'2030 он хүртэл баримтлах ГБХНХ-ын салбарын болого, зорилт, үр дүнгийн мэдээллийг нэгтгэх, боловсруулах',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.10.28',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'415.0',n:'Ерөнхий сайдын ахмад настнуудтай суурь тэтгэврийн асуудлаар хийх уулзалтын бэлтгэл хангах, мэдээлэл бэлтгэх',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.11.01',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'416.0',n:'Эмч, багш, ТҮ-ний албан хаагчдын цалингийн өсөлт, тэтгэврийн нэмэгдлийн талаар мэдээлэл бэлтгэж, хэвлэлийн албанд өгөх',c:'АА',o:'Munkhzul Lkhagvasuren',d:'2026.10.30',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'417.0',n:'ЕС-ийг эрт илрүүлгийн явцтай танилцуулах уулзалт зохион байгуулах',c:'АА',o:'Nomin Ganbaatar',d:'2026.10.23',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'418.0',n:'ЗГХХГ-тай хамтран эрт илрүүлгийн явцыг сайжруулах, газар дээр нь ажиллах, зөвлөмж хүргүүлэх',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.11.06',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'419.0',n:'ХТҮЗ-ийн ээлжит хурал 11.20-нд зохион байгуулах хөтөлбөр, удирдамж боловсруулах',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.11.20',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'420.0',n:'Хүүхдийн ордон 2 нээлт 11.20-ны өдөр зохион байгуулах ',c:'ЗГ',o:'Nomin Ganbaatar',d:'2026.11.20',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'421.0',n:'Телемедицины төвийг тохижуулах, сайжруулах Ойр ЭМ-ийн хүрээнд ',c:'АА',o:'Nomin Ganbaatar',d:'2026.12.25',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'422.0',n:'Эмйин холбооны 30 жил арга хэмжээг ЕС-ын ивээл доор зохион байгуулах',c:'АА',o:'Nomin Ganbaatar',d:'2026.12.04',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'423.0',n:'ЕБС-ийн сэтгэл зүйн ЭМ-ийг сайжруулах төлөвлөгөө батлуулах',c:'АА',o:'Nomin Ganbaatar',d:'2026.12.11',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'424.0',n:'ЗГХЭГ-тай хамтарсан За бол Заавал хийе явцын хурал зохион байгуулах',c:'ЗГХЭГ',o:'Nomin Ganbaatar',d:'2026.10.29',s:'Дууссан',pr:'m',nt:'',ov:false,pct:100},
+  {id:'425.0',n:'Unicef-тэй хамтран ХТҮЗ-ийг үйл ажиллагааг сайжруулах хамтарсан уулзалт',c:'АА',o:'Nomin Ganbaatar',d:'2026.11.20',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'426.0',n:'За бол заавал хийе үндэсний хөдөлгөөнийг 11.20-ны өдөр улс орон даяаар өрнүүлэх',c:'АА',o:'Nomin Ganbaatar',d:'2026.11.20',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0},
+  {id:'427.0',n:'Нийгмийн эрүүл мэндийн салбар үүсэж хөгжсөн 70 жилийн ойн арга хэмжээ илгээлт',c:'АА',o:'Nomin Ganbaatar',d:'2026.11.13',s:'Хэрэгжиж байгаа',pr:'m',nt:'',ov:false,pct:0}
 ];
 const URGENT=[
   {n:'2, 39-р сургуулиуд дээр ажиллах ',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.04.17',pct:100,s:'Дууссан',nt:'',ov:false},
@@ -1107,7 +1124,7 @@ const URGENT=[
   {n:'Мэргэжлийн нэгдсэн холбооны хуулийн талаар Их танхимд хурал',c:'ЗГХЭГ',o:'Erdenetuya Ganbold, Tengis Sukhee, Tamir Erdene-Ochir',d:'2026.06.09',pct:100,s:'Дууссан',nt:'',ov:false},
   {n:'Эрчим хүчний инженерүүдийн уулзалт, арга хэмжээ',c:'АА',o:'Tamir Erdene-Ochir, Bulganchimeg Bayasgalan',d:'2026.06.30',pct:100,s:'Дууссан',nt:'',ov:false},
   {n:'Хүүхдийн төлөө үндэсний зөвлөлийн хурал',c:'ЗГХЭГ',o:'Bulganchimeg Bayasgalan',d:'2026.05.26',pct:100,s:'Дууссан',nt:'',ov:false},
-  {n:' "Эхийн алдар" Их танхимд МЭХ зохион байгуулж буй соён гэгээрлийн ажил ',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.05.31',pct:0,s:'Эхлээгүй',nt:'Цуцалсан',ov:true},
+  {n:' "Эхийн алдар" Их танхимд МЭХ зохион байгуулж буй соён гэгээрлийн ажил ',c:'АА',o:'Tamir Erdene-Ochir',d:'2026.05.31',pct:0,s:'Эхлээгүй',nt:'Цуцалсан',ov:true},
   {n:'Хөдөлмөр нийгмийн зөвшилцлийн 3 талт улсын хэлэлцээрт ЕС үг хэлэх ',c:'АА',o:'Erdenetuya Ganbold',d:'2026.05.21',pct:100,s:'Дууссан',nt:'',ov:false},
   {n:'SDW Хойд бүс алдарт эхийн одон гардуулах ',c:'',o:'Erdenetuya Ganbold',d:'2026.05.31',pct:100,s:'Дууссан',nt:'',ov:false},
   {n:'DRENECON хаалтын үг',c:'АА',o:'Ganbat Bulgaa',d:'2026.05.31',pct:100,s:'Дууссан',nt:'',ov:false},
@@ -1140,26 +1157,26 @@ const URGENT=[
 const ADV=[
   {n:'Dashdemberel Lkhagvasuren',total:1,done:0,ov:0,pct:0},
   {n:'Tengis Sukhee',total:25,done:15,ov:9,pct:60},
-  {n:'Bulganchimeg Bayasgalan',total:84,done:29,ov:37,pct:35},
+  {n:'Bulganchimeg Bayasgalan',total:84,done:29,ov:38,pct:35},
   {n:'Erdenetuya Ganbold',total:70,done:48,ov:19,pct:69},
   {n:'Tsolmon Dorjderem',total:8,done:0,ov:8,pct:0},
   {n:'Sukh-Ochir Batsukh',total:16,done:12,ov:4,pct:75},
-  {n:'Chimguundari Navaan-Yunden',total:31,done:24,ov:1,pct:77},
-  {n:'Ganbat Bulgaa',total:23,done:15,ov:5,pct:65},
-  {n:'Nomin Ganbaatar',total:67,done:56,ov:1,pct:84},
+  {n:'Chimguundari Navaan-Yunden',total:31,done:26,ov:1,pct:84},
+  {n:'Ganbat Bulgaa',total:23,done:15,ov:7,pct:65},
+  {n:'Nomin Ganbaatar',total:78,done:63,ov:0,pct:81},
   {n:'Batkhuu Otgon',total:18,done:11,ov:7,pct:61},
-  {n:'Munkhzul Lkhagvasuren',total:23,done:18,ov:3,pct:78},
+  {n:'Munkhzul Lkhagvasuren',total:27,done:24,ov:3,pct:89},
   {n:'Surenkhorol Khash-Erdene',total:4,done:1,ov:3,pct:25},
   {n:'Enkh-Amgalan Lkhagvabayar',total:6,done:4,ov:2,pct:67},
-  {n:'Dalkhaasuren Sugarjav',total:15,done:10,ov:2,pct:67},
+  {n:'Dalkhaasuren Sugarjav',total:18,done:10,ov:3,pct:56},
   {n:'Bayar Amarbayasgalan',total:5,done:1,ov:1,pct:20},
-  {n:'Tamir Erdene-Ochir',total:11,done:9,ov:0,pct:82}
+  {n:'Tamir Erdene-Ochir',total:13,done:11,ov:1,pct:85}
 ];
 function renderDashboard(){
   const owner=document.getElementById('dash-owner').value;
   const status=document.getElementById('dash-status').value;
   const cat=document.getElementById('dash-cat').value;
- 
+
   // Filter tasks
   let ft=TASKS.filter(t=>{
     if(owner&&t.o!==owner)return false;
@@ -1167,7 +1184,7 @@ function renderDashboard(){
     if(cat&&t.c!==cat)return false;
     return true;
   }).map(t=>({...t, due:t.d||'', pg:t.pct||0, no:t.id}));
- 
+
   // Filter urgent
   let fu=URGENT.filter(u=>{
     if(owner){
@@ -1192,61 +1209,61 @@ function renderDashboard(){
     }
     return {...u, due, pg, no:u.id, wk};
   });
- 
+
   const total=ft.length;
   const done=ft.filter(t=>t.s==='Дууссан').length;
   const prog=ft.filter(t=>t.s==='Хэрэгжиж байгаа').length;
   const over=ft.filter(t=>t.ov).length;
   const pct=total>0?Math.round(done/total*100):0;
- 
+
   const urgTotal=fu.length;
   const urgOver=fu.filter(u=>u.ov).length;
   const urgWeek=fu.filter(u=>u.wk).length;
   const urgDone=fu.filter(u=>u.pg>=100).length;
   const urgOverPct=urgTotal>0?Math.round(urgOver/urgTotal*100):0;
   const urgDonePct=urgTotal>0?Math.round(urgDone/urgTotal*100):0;
- 
+
   // Task stats
   document.getElementById('dash-task-stats').innerHTML=`
     <div class="sc s-bl"><div class="sl">Нийт бүртгэлтэй ажил</div><div class="sv bl">${total}</div><div class="ss">Ажлын санд бүртгэлтэй</div></div>
     <div class="sc s-gn"><div class="sl">Дууссан</div><div class="sv gn">${done}</div><div class="ss">${pct}% нийт ажлаас</div></div>
     <div class="sc s-am"><div class="sl">Хэрэгжиж байгаа</div><div class="sv am">${prog}</div><div class="ss">Гүйцэтгэлд байгаа</div></div>
     <div class="sc s-rd"><div class="sl">Хугацаа хэтэрсэн</div><div class="sv rd">${over}</div><div class="ss">Яаралтай анхаарал</div></div>`;
- 
+
   // Urgent stats
   document.getElementById('dash-urg-stats').innerHTML=`
     <div class="sc s-bl"><div class="sl">Нийт яаралтай ажил</div><div class="sv bl">${urgTotal}</div><div class="ss">Яаралтай чиглэлд бүртгэлтэй</div></div>
     <div class="sc s-rd"><div class="sl">Хугацаа хэтэрсэн</div><div class="sv rd">${urgOver}</div><div class="ss">${urgOverPct}% нийт яаралтай</div></div>
     <div class="sc s-am"><div class="sl">Энэ 7 хоногт</div><div class="sv am">${urgWeek}</div><div class="ss">10.06–10.13 дуусах</div></div>
     <div class="sc s-tl"><div class="sl">Дууссан</div><div class="sv tl">${urgDone}</div><div class="ss">${urgDonePct}% нийт яаралтай</div></div>`;
- 
+
   // Хоёр эхийн ажлуудыг нийлүүлж харуулах
   const owner_filter = owner;
- 
+
   // Ажлын сан — ID буурах дарааллаар (сүүлд нэмэгдсэн дээр)
   const taskRows = ft.map(t=>({
     src:'task', no:t.id, name:t.n, cat:t.c, owner:t.o,
     due:t.due, pg:t.pg, stat:t.s, ov:t.ov
   })).sort((a,b)=>b.no-a.no);
- 
+
   // Яаралтай чиглэл — дугаараар буурах
   const urgRows = fu.map(u=>({
     src:'urgent', no:u.no, name:u.n, cat:u.c, owner:u.o,
     due:u.due, pg:u.pg, stat:u.pg>=100?'Дууссан':u.ov?'Хоцорсон':'Хэрэгжиж байгаа', ov:u.ov
   })).sort((a,b)=>b.no-a.no);
- 
+
   // Нийлүүлэх — ID буурах дарааллаар (хамгийн сүүлд нэмэгдсэн дээр)
   const allRows = [...urgRows, ...taskRows].sort((a,b)=>b.no-a.no);
   const titleTxt = owner_filter
     ? `${owner_filter.split(' ')[0]} — нийт ${allRows.length} ажил`
     : `Бүх ажил — нийт ${allRows.length} (📋${taskRows.length} + ⚡${urgRows.length})`;
- 
+
   if(document.getElementById('dt-title')) document.getElementById('dt-title').textContent=titleTxt;
   if(document.getElementById('dt-count')) document.getElementById('dt-count').textContent='';
- 
+
   // Modal data store (global)
   window._modalAllRows = allRows;
- 
+
   // Preview — сүүлийн 5 ажил харуулах
   const prev3 = allRows.slice(0,5);
   document.getElementById('dt-preview').innerHTML = prev3.map(r=>{
@@ -1264,16 +1281,16 @@ function renderDashboard(){
       <span style="font-size:11px;font-weight:700;color:${statC};white-space:nowrap">${statTxt}</span>
     </div>`;
   }).join('');
- 
+
   // Cats
   const cats=[{n:'Ажлын алба',c:ft.filter(t=>t.c==='АА'||t.c==='Ажлын алба').length},{n:'Засгийн газар',c:ft.filter(t=>t.c==='ЗГ'||t.c==='Засгийн газар').length},{n:'ЗГХЭГ-тай холбоотой',c:ft.filter(t=>t.c==='ЗГХЭГ'||t.c==='ЗГХЭГ-тай холбоотой').length},{n:'УИХ',c:ft.filter(t=>t.c==='УИХ').length},{n:'Ажлын хэсэг',c:ft.filter(t=>t.c==='АХ'||t.c==='Ажлын хэсэг').length}];
   const maxCat=Math.max(...cats.map(c=>c.c),1);
   document.getElementById('dt-cats').innerHTML=cats.map(c=>`<div class="cr"><span class="crn">${c.n}</span><div class="crbar"><div class="crfill" style="width:${Math.round(c.c/maxCat*100)}%"></div></div><span class="crnum">${c.c}</span></div>`).join('');
- 
+
   
 const ADV_HIDDEN_DASH = ['Tengis Sukhee','Sukh-Ochir Batsukh','Enkh-Amgalan Lkhagvabayar'];
   const advFiltered = ADV.filter(a=>!ADV_HIDDEN_DASH.includes(a.n) && (!owner||a.n===owner));
- 
+
   // Advisor data build (хадгалж global-д тавих)
   window._advData = ADV.filter(a=>!ADV_HIDDEN_DASH.includes(a.n)).map(a=>{
     // ADV fields: {n, totalT, doneT, ovT}
@@ -1289,10 +1306,10 @@ const ADV_HIDDEN_DASH = ['Tengis Sukhee','Sukh-Ochir Batsukh','Enkh-Amgalan Lkha
     const totalAvg = totalT ? Math.round((avg*t + uAvg*uT)/totalT) : 0;
     return {n:a.n, t, d, ov, avg, c, role:'', uT, uD, uOv, totalT, totalD, totalOv, totalAvg};
   });
- 
+
   // Label update
   document.getElementById('adv-count-label').textContent = `${window._advData.length} зөвлөх`;
- 
+
   // Preview — дээд 5 зөвлөх (нийт ажлаар эрэмбэлсэн)
   const top3adv = [...window._advData].sort((a,b)=>b.totalT-a.totalT).slice(0,5);
   document.getElementById('dt-advisors-preview').innerHTML = top3adv.map(a=>`
@@ -1304,14 +1321,14 @@ const ADV_HIDDEN_DASH = ['Tengis Sukhee','Sukh-Ochir Batsukh','Enkh-Amgalan Lkha
       </div>
       <div class="anum" style="font-size:16px">${a.totalT}</div>
     </div>`).join('');
- 
+
   // Overdue — global хадгал
   window._ovTasks = ft.filter(t=>t.ov);
   const ovTasks = window._ovTasks;
- 
+
   // Overdue label
   document.getElementById('ov-count-label').textContent = `Хугацаа хэтэрсэн (${ovTasks.length})`;
- 
+
   // Overdue preview — эхний 5
   document.getElementById('dt-overdue-preview').innerHTML = ovTasks.slice(0,5).map(t=>`
     <div style="display:flex;align-items:flex-start;gap:9px;padding:6px 12px;border-bottom:1px solid #fca5a5">
@@ -1324,7 +1341,7 @@ const ADV_HIDDEN_DASH = ['Tengis Sukhee','Sukh-Ochir Batsukh','Enkh-Amgalan Lkha
         <div style="font-size:10px;color:var(--gy)">${t.pg}%</div>
       </div>
     </div>`).join('') || '<div class="nd" style="padding:10px 14px">Хэтэрсэн ажил байхгүй</div>';
- 
+
   // Populate overdue owner filter
   const ovEl = document.getElementById('ov-owner-filter');
   if(ovEl && ovEl.options.length<=1){
@@ -1333,7 +1350,7 @@ const ADV_HIDDEN_DASH = ['Tengis Sukhee','Sukh-Ochir Batsukh','Enkh-Amgalan Lkha
     });
   }
 }
- 
+
 function buildDash(){
   renderDashboard();
   syncBottomCards();
@@ -1346,7 +1363,7 @@ function syncBottomCards(){
     cards.forEach(c=>{ c.style.minHeight=maxH+'px'; });
   });
 }
- 
+
 // ── ADVISOR MODAL ──
 function openAdvModal(){
   document.getElementById('adv-modal-overlay').style.display='flex';
@@ -1369,7 +1386,7 @@ function closeAdvModal(){
   document.body.style.overflow='';
 }
 document.addEventListener('click',e=>{ if(e.target&&e.target.id==='adv-modal-overlay') closeAdvModal(); });
- 
+
 // ── OVERDUE MODAL ──
 function openOvModal(){
   document.getElementById('ov-modal-overlay').style.display='flex';
@@ -1381,7 +1398,7 @@ function closeOvModal(){
   document.body.style.overflow='';
 }
 document.addEventListener('click',e=>{ if(e.target&&e.target.id==='ov-modal-overlay') closeOvModal(); });
- 
+
 function renderOvModal(){
   const tasks = window._ovTasks || [];
   const ownerF = document.getElementById('ov-owner-filter').value;
@@ -1409,10 +1426,10 @@ function renderOvModal(){
     : '<div class="nd" style="padding:32px;text-align:center">Тохирох ажил олдсонгүй</div>';
   document.getElementById('ov-modal-footer').textContent = `${filtered.length} ажил · Гадна дарж хаана`;
 }
- 
+
 // ── TASK MODAL ──
 let _modalStatusFilter = '';
- 
+
 function openTaskModal(){
   document.getElementById('task-modal-overlay').classList.add('open');
   document.body.style.overflow='hidden';
@@ -1426,7 +1443,7 @@ document.addEventListener('click', e=>{
   if(e.target && e.target.id==='task-modal-overlay') closeTaskModal();
 });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeTaskModal(); });
- 
+
 function setModalFilter(btn, key, val){
   // Status chips
   document.querySelectorAll('.mf-chip[data-key="'+key+'"]').forEach(c=>c.classList.remove('active'));
@@ -1434,13 +1451,13 @@ function setModalFilter(btn, key, val){
   _modalStatusFilter = val;
   renderModalList();
 }
- 
+
 function renderModalList(){
   const rows = window._modalAllRows || [];
   const status = _modalStatusFilter;
   const month  = document.getElementById('modal-month-filter').value;
   const search = (document.getElementById('modal-search').value||'').toLowerCase();
- 
+
   const filtered = rows.filter(r=>{
     // Status filter
     if(status==='overdue' && !r.ov) return false;
@@ -1455,20 +1472,20 @@ function renderModalList(){
     if(search && !r.name.toLowerCase().includes(search) && !r.owner.toLowerCase().includes(search)) return false;
     return true;
   });
- 
+
   // Update header
   const owner = document.getElementById('dash-owner').value;
   document.getElementById('modal-title-txt').textContent =
     owner ? `${owner.split(' ')[0]} — ажлуудын жагсаалт` : 'Бүх ажлуудын жагсаалт';
   document.getElementById('modal-sub-txt').textContent =
     `Нийт ${rows.length} ажлаас ${filtered.length} харуулж байна · Сүүлд нэмэгдсэнээс`;
- 
+
   if(!filtered.length){
     document.getElementById('modal-list').innerHTML='<div class="nd" style="padding:32px;text-align:center">Тохирох ажил олдсонгүй</div>';
     document.getElementById('modal-footer-txt').textContent='Үр дүн байхгүй';
     return;
   }
- 
+
   let h='';
   filtered.forEach((r,i)=>{
     const srcBadge = r.src==='urgent'
@@ -1497,12 +1514,12 @@ function renderModalList(){
       </div>
     </div>`;
   });
- 
+
   document.getElementById('modal-list').innerHTML = h;
   document.getElementById('modal-footer-txt').textContent =
     `${filtered.length} ажил харуулж байна · Гадна дарж хаана`;
 }
- 
+
 // TASKS PAGE
 function initFilters(){
   const os=document.getElementById('f-owner');
@@ -1533,7 +1550,7 @@ function renderTasks(){
   });
   document.getElementById('t-table').innerHTML=h+'</tbody>';
 }
- 
+
 // URGENT
 function initUrgentFilters(){
   // Owners - олон нэрийг тус тусад нь задлах
@@ -1549,13 +1566,13 @@ function initUrgentFilters(){
   const ucs=document.getElementById('u-cat');
   uCats.forEach(c=>{const op=document.createElement('option');op.value=c;op.textContent=c;ucs.appendChild(op);});
 }
- 
+
 function renderUrgent(){
   const owner=document.getElementById('u-owner').value;
   const status=document.getElementById('u-status').value;
   const cat=document.getElementById('u-cat').value;
   const srch=document.getElementById('u-search').value.toLowerCase();
- 
+
   let fl=URGENT.filter(u=>{
     if(owner&&!u.o.split(',').map(s=>s.trim()).includes(owner))return false;
     if(cat&&u.c!==cat)return false;
@@ -1566,9 +1583,9 @@ function renderUrgent(){
     if(status==='upcoming'&&(u.ov||u.wk||u.pg>=100))return false;
     return true;
   });
- 
+
   document.getElementById('uc').textContent=`${fl.length} ажил`;
- 
+
   let h='<thead><tr><th>№</th><th>Яаралтай ажлын нэр</th><th>Хариуцагч</th><th>Ангилал</th><th>Эхлэх</th><th>Дуусах</th><th>Гүйцэтгэл</th><th>Төлөв</th></tr></thead><tbody>';
   if(!fl.length){h+='<tr><td colspan="8" class="nd">Ажил олдсонгүй</td></tr>';}
   else fl.forEach(u=>{
@@ -1578,7 +1595,7 @@ function renderUrgent(){
   });
   document.getElementById('u-table').innerHTML=h+'</tbody>';
 }
- 
+
 // MY WORK
 function initMyWork(){
   const s=document.getElementById('my-owner');
@@ -1602,7 +1619,7 @@ function renderMyWork(){
     document.getElementById('my-stats').innerHTML='';
     return;
   }
- 
+
   // Хоёр эхийн статистик
   const mt  = TASKS.filter(t=>t.o===owner||t.cl===owner);
   const mu  = URGENT.filter(u=>u.o===owner||u.o.includes(owner));
@@ -1612,7 +1629,7 @@ function renderMyWork(){
   const u_d = mu.filter(u=>u.pg>=100).length;
   const u_ov= mu.filter(u=>u.ov).length;
   const u_act= mu.length - u_d - u_ov;
- 
+
   document.getElementById('my-stats').innerHTML=`
     <div class="ms-item" style="border-bottom:3px solid var(--bl)">
       <div class="sl">Ажлын сан</div>
@@ -1634,7 +1651,7 @@ function renderMyWork(){
       <div class="sv rd" style="font-size:22px">${t_ov+u_ov}</div>
       <div style="font-size:10px;color:var(--gy);margin-top:2px">Яаралтай анхаарал</div>
     </div>`;
- 
+
   // ТАБ-аас хамаарч харуулах өгөгдөл
   if(myTab==='tasks'){
     document.getElementById('my-title').textContent=owner+' — Ажлын сан';
@@ -1667,7 +1684,7 @@ function renderMyWork(){
     document.getElementById('my-table').innerHTML=h+'</tbody>';
   }
 }
- 
+
 // WEEKLY
 function buildWeekly(){
   const wk=TASKS.filter(t=>t.wk);
@@ -1683,7 +1700,7 @@ function buildWeekly(){
   });
   document.getElementById('wk-over-table').innerHTML=h2+'</tbody>';
 }
- 
+
 // ӨНӨӨДРИЙН ОГНОО
 (function(){
   const days=["Ням","Даваа","Мягмар","Лхагва","Пүрэв","Баасан","Бямба"];
@@ -1694,7 +1711,7 @@ function buildWeekly(){
   const dn=days[now.getDay()];
   document.getElementById("today-date").textContent=`${y}.${m}.${d} · ${dn} гараг`;
 })();
- 
+
 // INIT
 initDashFilters();
 buildDash();
@@ -1707,4 +1724,3 @@ buildWeekly();
 </script>
 </body>
 </html>
- 
